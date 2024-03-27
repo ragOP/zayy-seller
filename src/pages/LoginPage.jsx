@@ -3,6 +3,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './LoginPage.css';
+import logo from "../Images/Sewzeelogo..png";
+
+
 
 function LoginPage() {
   const [username, setUsername] = useState('');
@@ -15,19 +18,28 @@ function LoginPage() {
   };
 
   return (
-    <div>
-      <h2>Login Page</h2>
-      <form onSubmit={handleLogin}>
-        <div>
-          <label>Username:</label>
-          <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+    <div className="login-page">
+      <div className="container">
+        <div className="left-container">
+          <img className="logo" src={logo} alt="Logo" /> {/* Insert the logo */}
+          <h2>Welcome Back!</h2>
+          <p>Please login to continue.</p>
         </div>
-        <div>
-          <label>Password:</label>
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+        <div className="right-container">
+          <h2>Login</h2>
+          <form onSubmit={handleLogin}>
+            <div className="form-group">
+              <label>Username:</label>
+              <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+            </div>
+            <div className="form-group">
+              <label>Password:</label>
+              <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+            </div>
+            <button type="submit">Login</button>
+          </form>
         </div>
-        <button type="submit">Login</button>
-      </form>
+      </div>
     </div>
   );
 }
