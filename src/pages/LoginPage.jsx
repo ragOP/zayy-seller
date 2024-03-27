@@ -9,13 +9,27 @@ import logo from "../Images/Sewzeelogo..png";
 
 function LoginPage() {
   const [username, setUsername] = useState('');
+  console.log(username)
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const handleLogin = () => {
-    // Implement your login logic here, for simplicity, let's just redirect to the dashboard
-    navigate('/dashboard');
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch('https://zayy-backend.onrender.com/api/auth/sellerLogin', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: username, password })
+      });
+  
+      if (response.ok) navigate('/dashboard');
+      else console.error('Login failed');
+  
+    } catch (error) {
+      
+    }
   };
+  
 
   return (
     <div className="login-page">
