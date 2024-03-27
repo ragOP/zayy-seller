@@ -13,6 +13,9 @@ function LoginPage() {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
+  const handleregister=()=>{
+    navigate("/register")}
+
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
@@ -38,6 +41,7 @@ function LoginPage() {
           <img className="logo" src={logo} alt="Logo" /> {/* Insert the logo */}
           <h2>Welcome Back!</h2>
           <p>Please login to continue.</p>
+          <button onClick={handleregister}>Register</button>
         </div>
         <div className="right-container">
           <h2>Login</h2>
