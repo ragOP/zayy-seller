@@ -9,6 +9,10 @@ function Sidebar() {
       <Link to="/dashboard/customers" style={linkStyle}>
         🤵 Customer List
       </Link>
+      <Link to="/dashboard/customers" style={linkStyle}>
+        🤵 Add Product
+      </Link>
+      
       <Link to="/dashboard/sellers" style={linkStyle}>
         🏪 Seller List
       </Link>

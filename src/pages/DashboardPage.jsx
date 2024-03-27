@@ -13,6 +13,7 @@ function DashboardPage() {
           <ul style={navStyle}>
             <li style={navItemStyle}><Link to="/dashboard">Home</Link></li>
             <li style={navItemStyle}><Link to="/dashboard/profile">Profile</Link></li>
+      
             <li style={navItemStyle}><Link to="/dashboard/settings">Settings</Link></li>
           </ul>
         </nav>
