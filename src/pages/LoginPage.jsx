@@ -1,38 +1,39 @@
 // LoginPage.js
 
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import './LoginPage.css';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "./LoginPage.css";
 import logo from "../Images/Sewzeelogo..png";
 
-
-
 function LoginPage() {
-  const [username, setUsername] = useState('');
-  console.log(username)
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState("");
+  console.log(username);
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const handleregister=()=>{
-    navigate("/register")}
+  const handleregister = () => {
+    navigate("/register");
+  };
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('https://zayy-backend.onrender.com/api/auth/sellerLogin', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: username, password })
-      });
-  
-      if (response.ok) navigate('/dashboard');
-      else console.error('Login failed');
-  
-    } catch (error) {
-      
-    }
+      const response = await fetch(
+        "https://zayy-backend.onrender.com/api/auth/sellerLogin",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: username, password }),
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        localStorage.setItem("token", data.token);
+        navigate("/dashboard");
+      } else console.error("Login failed");
+    } catch (error) {}
   };
-  
 
   return (
     <div className="login-page">
@@ -48,11 +49,19 @@ function LoginPage() {
           <form onSubmit={handleLogin}>
             <div className="form-group">
               <label>Username:</label>
-              <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+              <input
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              />
             </div>
             <div className="form-group">
               <label>Password:</label>
-              <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
             </div>
             <button type="submit">Login</button>
           </form>
