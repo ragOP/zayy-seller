@@ -14,7 +14,7 @@ function DashboardPage() {
           {" "}
           {/* Adjust margin to accommodate the sidebar */}
           {/* Add your dashboard content here */}
-          <h2>Welcome ${} the Dashboard!</h2>
+          <h2 className="text-center mt-3">Welcome to the Dashboard!</h2>
         </div>
       </div>
     </div>
