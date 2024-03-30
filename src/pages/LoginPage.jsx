@@ -9,7 +9,6 @@ import "react-toastify/dist/ReactToastify.css";
 
 function LoginPage() {
   const [username, setUsername] = useState("");
-  console.log(username);
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
@@ -20,13 +19,6 @@ function LoginPage() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      toast.success("Welcome again! Please wait while we fetch tour data", {
-        position: "bottom-right",
-        autoClose: 30000,
-        hideProgressBar: false,
-        progress: undefined,
-        theme: "light",
-      });
       const response = await fetch(
         "https://zayy-backend.onrender.com/api/auth/sellerLogin",
         {
@@ -39,9 +31,24 @@ function LoginPage() {
       if (response.ok) {
         const data = await response.json();
         localStorage.setItem("token", data.token);
-        navigate("/dashboard");
-      } else console.error("Login failed");
-    } catch (error) {}
+        toast.success("Welcome again! Please wait while we fetch tour data", {
+          position: "bottom-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          progress: undefined,
+          theme: "light",
+        });
+        setTimeout(() => {
+          navigate("/dashboard");
+        }, 2000);
+      } else {
+        const errorMessage = await response.text();
+        throw new Error(errorMessage);
+      }
+    } catch (error) {
+      console.error("Registration failed:", error);
+      toast.error("Login failed. Please try again later.");
+    }
   };
 
   return (

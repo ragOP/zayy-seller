@@ -62,6 +62,7 @@ const AddProduct = () => {
       }
     } catch (error) {
       console.error("Registration failed:", error);
+      toast.error("Can't add product now. Please try again later.");
       // Handle registration error
     }
   };
@@ -77,7 +78,7 @@ const AddProduct = () => {
         <h2 className="text-4xl font-bold mb-4 text-gray-50">Add Product</h2>
         <form
           onSubmit={handleSubmit}
-          className="space-y-4 bg-gray-50 py-5 px-3 w-96"
+          className="space-y-4 bg-gray-50 py-5 px-3 min-w-fit"
         >
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const Header = () => {
   return (
     <header style={headerStyle}>
-      <h2 style={{ marginLeft: "10px" }}>Dashboard</h2>
+      <h2 style={{ marginLeft: "10px" }}>Seller Dashboard</h2>
       <nav>
         <ul style={navStyle}>
           <li style={navItemStyle}>
