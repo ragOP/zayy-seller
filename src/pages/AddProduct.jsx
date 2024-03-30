@@ -1,28 +1,7 @@
 import React, { useState } from "react";
-import {
-  TextField,
-  Checkbox,
-  FormControlLabel,
-  Select,
-  MenuItem,
-  Button,
-  Grid,
-  Typography,
-  Paper,
-  ThemeProvider,
-} from "@mui/material";
-import { styled } from "@mui/system";
 import { useNavigate } from "react-router-dom";
-import { createTheme } from "@mui/material/styles"; // Import createTheme to create a theme object
-
-// Define your custom theme
-const theme = createTheme();
-
-const StyledPaper = styled(Paper)(({ theme }) => ({
-  padding: theme.spacing(2),
-  marginBottom: theme.spacing(2),
-}));
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const AddProduct = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -65,7 +44,16 @@ const AddProduct = () => {
 
       if (response.ok) {
         // Registration successful, redirect to login page or dashboard
-        alert("added");
+        toast.success("Product Added", {
+          position: "bottom-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          progress: undefined,
+          theme: "light",
+        });
+        setTimeout(() => {
+          navigate("/dashboard");
+        }, 2000);
       } else {
         // Registration failed, handle the error
         const errorMessage = await response.text();
@@ -78,128 +66,202 @@ const AddProduct = () => {
     }
   };
   return (
-    <ThemeProvider theme={theme}>
-      <StyledPaper>
-        <Typography variant="h5" gutterBottom>
-          Add Product
-        </Typography>
-        <form onSubmit={handleSubmit}>
-          <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                label="Name"
-                fullWidth
+    <>
+      <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        theme="light"
+      />
+      <div className="p-8 flex items-center justify-center flex-col bg-[#7d5ffe]">
+        <h2 className="text-4xl font-bold mb-4 text-gray-50">Add Product</h2>
+        <form
+          onSubmit={handleSubmit}
+          className="space-y-4 bg-gray-50 py-5 px-3 w-96"
+        >
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label
+                htmlFor="name"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Name:
+              </label>
+              <input
+                id="name"
                 name="name"
+                type="text"
                 value={formData.name}
                 onChange={handleChange}
+                className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-900 rounded-md py-3 px-2"
               />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                label="Price"
-                fullWidth
-                type="number"
+            </div>
+            <div>
+              <label
+                htmlFor="price"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Price:
+              </label>
+              <input
+                id="price"
                 name="price"
+                type="text"
                 value={formData.price}
                 onChange={handleChange}
+                className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-900 rounded-md py-3 px-2"
               />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                label="Discount"
-                fullWidth
-                type="number"
+            </div>
+            <div>
+              <label
+                htmlFor="discount"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Discount:
+              </label>
+              <input
+                id="discount"
                 name="discount"
+                type="number"
                 value={formData.discount}
                 onChange={handleChange}
+                className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-900 rounded-md py-3"
               />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <Select
-                label="Discount Type"
-                fullWidth
+            </div>
+            <div>
+              <label
+                htmlFor="discount_type"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Discount Type:
+              </label>
+              <select
+                id="discount_type"
                 name="discount_type"
                 value={formData.discount_type}
                 onChange={handleChange}
+                className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-900 rounded-md py-3 px-2 bg-transparent"
               >
-                <MenuItem value="percentage">Percentage</MenuItem>
-                <MenuItem value="fixed">Fixed</MenuItem>
-              </Select>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                label="Sales Price"
-                fullWidth
-                type="number"
+                <option value="percentage">Percentage</option>
+                <option value="fixed">Fixed</option>
+              </select>
+            </div>
+            <div>
+              <label
+                htmlFor="salesprice"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Sales Price:
+              </label>
+              <input
+                id="salesprice"
                 name="salesprice"
+                type="number"
                 value={formData.salesprice}
                 onChange={handleChange}
+                className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-900 rounded-md py-3 px-2 bg-transparent"
               />
-            </Grid>
-            <Grid item xs={12}>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={formData.onsale}
-                    onChange={handleChange}
-                    name="onsale"
-                  />
-                }
-                label="On Sale"
+            </div>
+            <div className="flex items-center">
+              <label
+                htmlFor="onsale"
+                className="block text-sm font-medium text-gray-700"
+              >
+                On Sale:
+              </label>
+              <input
+                id="onsale"
+                name="onsale"
+                type="checkbox"
+                checked={formData.onsale}
+                onChange={handleChange}
+                className="ms-2 -mt-1"
               />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                label="Total Stock"
-                fullWidth
-                type="number"
+            </div>
+            <div>
+              <label
+                htmlFor="totalstock"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Total Stock:
+              </label>
+              <input
+                id="totalstock"
                 name="totalstock"
+                type="number"
                 value={formData.totalstock}
                 onChange={handleChange}
+                className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-900 rounded-md py-3 px-2 bg-transparent"
               />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                label="In Stock"
-                fullWidth
-                type="number"
+            </div>
+            <div>
+              <label
+                htmlFor="instock"
+                className="block text-sm font-medium text-gray-700"
+              >
+                In Stock:
+              </label>
+              <input
+                id="instock"
                 name="instock"
+                type="number"
                 value={formData.instock}
                 onChange={handleChange}
+                className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-900 rounded-md py-3 px-2 bg-transparent"
               />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                label="Category"
-                fullWidth
+            </div>
+            <div>
+              <label
+                htmlFor="category"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Category:
+              </label>
+              <select
+                id="category"
                 name="category"
                 value={formData.category}
                 onChange={handleChange}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                label="Type"
-                fullWidth
+                className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-900 rounded-md py-3 px-2 bg-transparent"
+              >
+                <option>Select Category</option>
+                <option value="indian">Lehnga</option>
+                <option value="pakistani">Kurti</option>
+                <option value="suit">Suit</option>
+                <option value="salwar">Salwar</option>
+              </select>
+            </div>
+
+            <div>
+              <label
+                htmlFor="type"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Type:
+              </label>
+              <select
+                id="type"
                 name="type"
                 value={formData.type}
                 onChange={handleChange}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <Button
-                type="submit"
-                variant="contained"
-                color="primary"
-                fullWidth
+                className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-900 rounded-md py-3 px-2 bg-transparent"
               >
-                Submit
-              </Button>
-            </Grid>
-          </Grid>
+                <option>Select Type</option>
+                <option value="suit">Suit</option>
+                <option value="shirt">Shirt</option>
+                <option value="lehnga">Lehnga</option>
+              </select>
+            </div>
+          </div>
+          <button
+            type="submit"
+            className="mt-4 w-full flex justify-center py-3 px-4 border border-transparent shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          >
+            Submit
+          </button>
         </form>
-      </StyledPaper>
-    </ThemeProvider>
+      </div>
+    </>
   );
 };
 
