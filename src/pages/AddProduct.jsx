@@ -15,18 +15,41 @@ const AddProduct = () => {
     instock: "",
     category: "",
     type: "",
+    images: [],
   });
 
   const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]: type === "checkbox" ? checked : value,
-    }));
+    const { name, value, type, checked, files } = e.target;
+    if (type === "file") {
+      const imagesArray = Array.from(files);
+      setFormData((prevState) => ({
+        ...prevState,
+        [name]: imagesArray,
+      }));
+    } else {
+      setFormData((prevState) => ({
+        ...prevState,
+        [name]: type === "checkbox" ? checked : value,
+      }));
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const formDataForRequest = new FormData();
+
+    for (const key in formData) {
+      if (key !== "images") {
+        formDataForRequest.append(key, formData[key]);
+      }
+    }
+
+    formData.images.forEach((image, index) => {
+      formDataForRequest.append("images", image);
+    });
+
+    console.log(formDataForRequest);
+    console.log(formData);
     const token = localStorage.getItem("token");
     try {
       // Call the API to register the seller
@@ -35,10 +58,9 @@ const AddProduct = () => {
         {
           method: "POST",
           headers: {
-            "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-          body: JSON.stringify(formData),
+          body: formDataForRequest,
         }
       );
 
@@ -252,6 +274,23 @@ const AddProduct = () => {
                 <option value="shirt">Shirt</option>
                 <option value="lehnga">Lehnga</option>
               </select>
+            </div>
+            <div>
+              <label
+                htmlFor="images"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Product Images:
+              </label>
+              <input
+                type="file"
+                id="images"
+                name="images"
+                accept="image/*"
+                multiple
+                onChange={handleChange}
+                className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-900 rounded-md py-3 px-2"
+              />
             </div>
           </div>
           <button
