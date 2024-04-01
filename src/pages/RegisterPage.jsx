@@ -38,12 +38,20 @@ const RegisterPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    let loadingToastId;
     try {
       const formDataForRequest = new FormData();
       for (const key in formData) {
         formDataForRequest.append(key, formData[key]);
       }
       // Call the API to register the seller
+      loadingToastId = toast.info("Logging in. Please wait...", {
+        position: "bottom-right",
+        autoClose: false,
+        hideProgressBar: false,
+        progress: undefined,
+        theme: "light",
+      });
       const response = await fetch(
         "https://zayy-backend.onrender.com/api/auth/sellerRegister",
         {
@@ -55,16 +63,11 @@ const RegisterPage = () => {
       if (response.ok) {
         const data = await response.json();
         localStorage.setItem("token", data.token);
-        toast.success(
-          "Welcome on board! Please wait while we fetch your details!",
-          {
-            position: "bottom-right",
-            autoClose: 2000,
-            hideProgressBar: false,
-            progress: undefined,
-            theme: "light",
-          }
-        );
+        toast.update(loadingToastId, {
+          render: "Welcome on board! Please wait while we fetch your details!",
+          type: "success",
+          autoClose: 2000,
+        });
         setTimeout(() => {
           navigate("/dashboard");
         }, 2000);
@@ -75,8 +78,13 @@ const RegisterPage = () => {
         // You may also handle the response body for more detailed error messages
       }
     } catch (error) {
-      console.error("Registration failed:", error);
-      toast.error("Registration failed. Please try again later.");
+      const parsedError = JSON.parse(error.message);
+      console.log("Error message:", parsedError.message);
+      toast.update(loadingToastId, {
+        render: parsedError.message,
+        type: "error",
+        autoClose: 2000,
+      });
       // Handle registration error
     }
   };
