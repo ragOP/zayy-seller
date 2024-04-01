@@ -51,8 +51,16 @@ const AddProduct = () => {
     console.log(formDataForRequest);
     console.log(formData);
     const token = localStorage.getItem("token");
+    let loadingToastId;
     try {
       // Call the API to register the seller
+      loadingToastId = toast.info("Adding Product. Please wait...", {
+        position: "bottom-right",
+        autoClose: false,
+        hideProgressBar: false,
+        progress: undefined,
+        theme: "light",
+      });
       const response = await fetch(
         "https://zayy-backend.onrender.com/api/seller/addProduct",
         {
@@ -66,12 +74,10 @@ const AddProduct = () => {
 
       if (response.ok) {
         // Registration successful, redirect to login page or dashboard
-        toast.success("Product Added", {
-          position: "bottom-right",
+        toast.update(loadingToastId, {
+          render: "Product added sucessfully",
+          type: "success",
           autoClose: 2000,
-          hideProgressBar: false,
-          progress: undefined,
-          theme: "light",
         });
         setTimeout(() => {
           navigate("/dashboard");
@@ -83,9 +89,13 @@ const AddProduct = () => {
         // You may also handle the response body for more detailed error messages
       }
     } catch (error) {
-      console.error("Registration failed:", error);
-      toast.error("Can't add product now. Please try again later.");
-      // Handle registration error
+      const parsedError = JSON.parse(error.message);
+      console.log("Error message:", parsedError.message);
+      toast.update(loadingToastId, {
+        render: parsedError.message,
+        type: "success",
+        autoClose: 2000,
+      });
     }
   };
   return (
@@ -94,6 +104,7 @@ const AddProduct = () => {
         position="bottom-right"
         autoClose={5000}
         hideProgressBar={false}
+        closeButton={false}
         theme="light"
       />
       <div className="p-8 flex items-center justify-center flex-col bg-[#7d5ffe]">

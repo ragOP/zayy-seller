@@ -1,8 +1,8 @@
 // DashboardPage.js
 
 import React from "react";
-import Sidebar from "./Sidebar"; // Import the Sidebar component
-import Header from "./Header";
+import Sidebar from "../components/Sidebar"; // Import the Sidebar component
+import Header from "../components/Header";
 
 function DashboardPage() {
   return (

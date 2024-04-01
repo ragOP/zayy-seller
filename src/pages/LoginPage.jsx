@@ -17,8 +17,16 @@ function LoginPage() {
   };
 
   const handleLogin = async (e) => {
+    let loadingToastId;
     e.preventDefault();
     try {
+      loadingToastId = toast.info("Logging in. Please wait...", {
+        position: "bottom-right",
+        autoClose: false,
+        hideProgressBar: false,
+        progress: undefined,
+        theme: "light",
+      });
       const response = await fetch(
         "https://zayy-backend.onrender.com/api/auth/sellerLogin",
         {
@@ -31,12 +39,10 @@ function LoginPage() {
       if (response.ok) {
         const data = await response.json();
         localStorage.setItem("token", data.token);
-        toast.success("Welcome again! Please wait while we fetch tour data", {
-          position: "bottom-right",
+        toast.update(loadingToastId, {
+          render: "Login successful! Redirecting...",
+          type: "success",
           autoClose: 2000,
-          hideProgressBar: false,
-          progress: undefined,
-          theme: "light",
         });
         setTimeout(() => {
           navigate("/dashboard");
@@ -46,8 +52,13 @@ function LoginPage() {
         throw new Error(errorMessage);
       }
     } catch (error) {
-      console.error("Registration failed:", error);
-      toast.error("Login failed. Please try again later.");
+      const parsedError = JSON.parse(error.message);
+      console.log("Error message:", parsedError.message);
+      toast.update(loadingToastId, {
+        render: parsedError.message,
+        type: "error",
+        autoClose: 2000,
+      });
     }
   };
 
@@ -57,6 +68,7 @@ function LoginPage() {
         position="bottom-right"
         autoClose={5000}
         hideProgressBar={false}
+        closeButton={false}
         theme="light"
       />
       <div className="login-page">
