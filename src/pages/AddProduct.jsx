@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
 const AddProduct = () => {
   const navigate = useNavigate();
+  const fileInputRef = useRef(null);
   const [formData, setFormData] = useState({
     name: "",
     price: "",
@@ -34,6 +36,21 @@ const AddProduct = () => {
     }
   };
 
+  const handleAddImages = () => {
+    fileInputRef.current.click();
+  };
+
+  const handleDeleteImage = (index) => {
+    setFormData((prevState) => {
+      const updatedImages = [...prevState.images];
+      updatedImages.splice(index, 1);
+      return {
+        ...prevState,
+        images: updatedImages,
+      };
+    });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formDataForRequest = new FormData();
@@ -48,12 +65,9 @@ const AddProduct = () => {
       formDataForRequest.append("images", image);
     });
 
-    console.log(formDataForRequest);
-    console.log(formData);
     const token = localStorage.getItem("token");
     let loadingToastId;
     try {
-      // Call the API to register the seller
       loadingToastId = toast.info("Adding Product. Please wait...", {
         position: "bottom-right",
         autoClose: false,
@@ -73,9 +87,8 @@ const AddProduct = () => {
       );
 
       if (response.ok) {
-        // Registration successful, redirect to login page or dashboard
         toast.update(loadingToastId, {
-          render: "Product added sucessfully",
+          render: "Product added successfully",
           type: "success",
           autoClose: 2000,
         });
@@ -83,21 +96,19 @@ const AddProduct = () => {
           navigate("/dashboard");
         }, 2000);
       } else {
-        // Registration failed, handle the error
         const errorMessage = await response.text();
         throw new Error(errorMessage);
-        // You may also handle the response body for more detailed error messages
       }
     } catch (error) {
       const parsedError = JSON.parse(error.message);
-      console.log("Error message:", parsedError.message);
       toast.update(loadingToastId, {
         render: parsedError.message,
-        type: "success",
+        type: "error",
         autoClose: 2000,
       });
     }
   };
+
   return (
     <>
       <ToastContainer
@@ -293,15 +304,43 @@ const AddProduct = () => {
               >
                 Product Images:
               </label>
-              <input
-                type="file"
-                id="images"
-                name="images"
-                accept="image/*"
-                multiple
-                onChange={handleChange}
-                className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-900 rounded-md py-3 px-2"
-              />
+              <div className="mt-1 flex">
+                <button
+                  type="button"
+                  onClick={handleAddImages}
+                  className="py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                >
+                  Add Images
+                </button>
+                <input
+                  type="file"
+                  id="images"
+                  name="images"
+                  accept="image/*"
+                  multiple
+                  ref={fileInputRef}
+                  onChange={handleChange}
+                  className="hidden"
+                />
+              </div>
+              <div className="flex items-center justify-center space-x-3">
+                {formData.images.map((image, index) => (
+                  <div key={index} className="mt-2 flex items-center">
+                    <img
+                      src={URL.createObjectURL(image)}
+                      alt="Product"
+                      className="h-24 w-24 object-cover rounded-md"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => handleDeleteImage(index)}
+                      className="ml-2 bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
           <button
