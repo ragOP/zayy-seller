@@ -325,7 +325,7 @@ const AddProduct = () => {
               </div>
               <div className="flex items-center justify-center space-x-3">
                 {formData.images.map((image, index) => (
-                  <div key={index} className="mt-2 flex items-center">
+                  <div key={index} className="relative mt-2">
                     <img
                       src={URL.createObjectURL(image)}
                       alt="Product"
@@ -334,9 +334,9 @@ const AddProduct = () => {
                     <button
                       type="button"
                       onClick={() => handleDeleteImage(index)}
-                      className="ml-2 bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
+                      className="absolute top-0 right-0 bg-gray-500 hover:bg-red-600 text-white rounded-full h-6 w-6 flex items-center justify-center text-xs"
                     >
-                      Delete
+                      X
                     </button>
                   </div>
                 ))}
