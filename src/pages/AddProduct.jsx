@@ -3,9 +3,77 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+const categoriesData = [
+  {
+    name: "Men's Clothing",
+    subcategories: ["T-Shirts", "Shirts", "Jeans", "Pants", "Jackets", "Suits"],
+  },
+  {
+    name: "Women's Clothing",
+    subcategories: ["Dresses", "Tops", "Skirts", "Jeans", "Outerwear", "Suits"],
+  },
+  {
+    name: "Kids' Clothing",
+    subcategories: [
+      "Boys' Clothing",
+      "Girls' Clothing",
+      "Baby Clothing",
+      "Accessories",
+    ],
+  },
+  {
+    name: "Footwear",
+    subcategories: ["Sneakers", "Boots", "Sandals", "Flats", "Heels"],
+  },
+  {
+    name: "Accessories",
+    subcategories: [
+      "Bags",
+      "Belts",
+      "Hats",
+      "Scarves",
+      "Jewelry",
+      "Sunglasses",
+    ],
+  },
+  {
+    name: "Underwear",
+    subcategories: ["Men's Underwear", "Women's Underwear", "Socks"],
+  },
+  {
+    name: "Swimwear",
+    subcategories: ["Men's Swimwear", "Women's Swimwear", "Kids' Swimwear"],
+  },
+  {
+    name: "Athletic Wear",
+    subcategories: [
+      "Activewear",
+      "Sports Bras",
+      "Yoga Pants",
+      "Running Shorts",
+    ],
+  },
+  {
+    name: "Maternity Clothing",
+    subcategories: ["Tops", "Bottoms", "Dresses", "Maternity Underwear"],
+  },
+  {
+    name: "Formal Wear",
+    subcategories: [
+      "Men's Formal Wear",
+      "Women's Formal Wear",
+      "Evening Gowns",
+      "Tuxedos",
+    ],
+  },
+];
+
 const AddProduct = () => {
   const navigate = useNavigate();
   const fileInputRef = useRef(null);
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedSubcategory, setSelectedSubcategory] = useState("");
+
   const [formData, setFormData] = useState({
     name: "",
     price: "",
@@ -49,6 +117,26 @@ const AddProduct = () => {
         images: updatedImages,
       };
     });
+  };
+
+  const handleCategoryChange = (e) => {
+    const categoryValue = e.target.value;
+    setFormData((prevState) => ({
+      ...prevState,
+      category: categoryValue,
+      type: "",
+    }));
+    setSelectedCategory(categoryValue);
+    setSelectedSubcategory("");
+  };
+
+  const handleSubcategoryChange = (e) => {
+    const subcategoryValue = e.target.value;
+    setFormData((prevState) => ({
+      ...prevState,
+      type: subcategoryValue,
+    }));
+    setSelectedSubcategory(subcategoryValue);
   };
 
   const handleSubmit = async (e) => {
@@ -256,45 +344,38 @@ const AddProduct = () => {
               />
             </div>
             <div>
-              <label
-                htmlFor="category"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Category:
-              </label>
+              <label htmlFor="category">Category:</label>
               <select
                 id="category"
-                name="category"
-                value={formData.category}
-                onChange={handleChange}
+                value={selectedCategory}
+                onChange={handleCategoryChange}
                 className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-900 rounded-md py-3 px-2 bg-transparent"
               >
-                <option>Select Category</option>
-                <option value="indian">Lehnga</option>
-                <option value="pakistani">Kurti</option>
-                <option value="suit">Suit</option>
-                <option value="salwar">Salwar</option>
+                <option value="">Select Category</option>
+                {categoriesData.map((category) => (
+                  <option key={category.name} value={category.name}>
+                    {category.name}
+                  </option>
+                ))}
               </select>
             </div>
-
             <div>
-              <label
-                htmlFor="type"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Type:
-              </label>
+              <label htmlFor="subcategory">Subcategory:</label>
               <select
-                id="type"
-                name="type"
-                value={formData.type}
-                onChange={handleChange}
+                id="subcategory"
+                value={selectedSubcategory}
+                onChange={handleSubcategoryChange}
                 className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-900 rounded-md py-3 px-2 bg-transparent"
               >
-                <option>Select Type</option>
-                <option value="suit">Suit</option>
-                <option value="shirt">Shirt</option>
-                <option value="lehnga">Lehnga</option>
+                <option value="">Select Subcategory</option>
+                {selectedCategory &&
+                  categoriesData
+                    .find((category) => category.name === selectedCategory)
+                    .subcategories.map((subcategory) => (
+                      <option key={subcategory} value={subcategory}>
+                        {subcategory}
+                      </option>
+                    ))}
               </select>
             </div>
             <div>
@@ -323,7 +404,7 @@ const AddProduct = () => {
                   className="hidden"
                 />
               </div>
-              <div className="flex items-center justify-center space-x-3">
+              <div className="flex items-center space-x-3 flex-wrap">
                 {formData.images.map((image, index) => (
                   <div key={index} className="relative mt-2">
                     <img
