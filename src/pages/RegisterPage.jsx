@@ -20,7 +20,7 @@ const RegisterPage = () => {
     bankName: "",
     branchName: "",
     accountHolderName: "",
-    businessType: "",
+    business_type: "",
     logo: null,
   });
 
@@ -52,31 +52,32 @@ const RegisterPage = () => {
         progress: undefined,
         theme: "light",
       });
-      const response = await fetch(
-        "https://zayy-backend.onrender.com/api/auth/sellerRegister",
-        {
-          method: "POST",
-          body: formDataForRequest,
-        }
-      );
+      // const response = await fetch(
+      //   "https://zayy-backend.onrender.com/api/auth/sellerRegister",
+      //   {
+      //     method: "POST",
+      //     body: formDataForRequest,
+      //   }
+      // );
 
-      if (response.ok) {
-        const data = await response.json();
-        localStorage.setItem("token", data.token);
-        toast.update(loadingToastId, {
-          render: "Welcome on board! Please wait while we fetch your details!",
-          type: "success",
-          autoClose: 2000,
-        });
-        setTimeout(() => {
-          navigate("/dashboard");
-        }, 2000);
-      } else {
-        // Registration failed, handle the error
-        const errorMessage = await response.text();
-        throw new Error(errorMessage);
-        // You may also handle the response body for more detailed error messages
-      }
+      // if (response.ok) {
+      //   const data = await response.json();
+      //   localStorage.setItem("token", data.token);
+      //   toast.update(loadingToastId, {
+      //     render: "Welcome on board! Please wait while we fetch your details!",
+      //     type: "success",
+      //     autoClose: 2000,
+      //   });
+      //   setTimeout(() => {
+      //     navigate("/dashboard");
+      //   }, 2000);
+      // } else {
+      //   // Registration failed, handle the error
+      //   const errorMessage = await response.text();
+      //   throw new Error(errorMessage);
+      //   // You may also handle the response body for more detailed error messages
+      // }
+      console.log("formData",formData)
     } catch (error) {
       const parsedError = JSON.parse(error.message);
       console.log("Error message:", parsedError.message);
@@ -363,20 +364,22 @@ const RegisterPage = () => {
                   />
                 </div>
                 <div>
-                  <label
-                    htmlFor="businessType"
-                    className="block text-sm font-medium text-gray-750"
-                  >
-                    Business Type:
-                  </label>
-                  <input
-                    id="businessType"
-                    name="businessType"
-                    type="text"
-                    value={formData.businessType}
-                    onChange={handleChange}
-                    className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                  />
+                <label
+    htmlFor="business_type"
+    className="block text-sm font-medium text-gray-750"
+  >
+    Business Type:
+  </label>
+  <select
+    id="business_type"
+    name="business_type"
+    value={formData.business_type}
+    onChange={handleChange}
+    className="mt-1 focus:ring-indigo-500 focus:border-indigo-300 block w-full shadow-sm sm:text-sm border border-gray-900 rounded-md py-2.5 px-2 bg-transparent"
+  >
+    <option value="brand">brand</option>
+    <option value="boutique">boutique</option>
+  </select>
                 </div>
               </div>
               <div>
