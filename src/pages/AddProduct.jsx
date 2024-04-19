@@ -5,66 +5,20 @@ import "react-toastify/dist/ReactToastify.css";
 
 const categoriesData = [
   {
-    name: "Men's Clothing",
+    name: "Men",
     subcategories: ["T-Shirts", "Shirts", "Jeans", "Pants", "Jackets", "Suits"],
   },
   {
-    name: "Women's Clothing",
+    name: "Women",
     subcategories: ["Dresses", "Tops", "Skirts", "Jeans", "Outerwear", "Suits"],
   },
   {
-    name: "Kids' Clothing",
-    subcategories: [
-      "Boys' Clothing",
-      "Girls' Clothing",
-      "Baby Clothing",
-      "Accessories",
-    ],
+    name: "Kids",
+    subcategories: ["Boys", "Girls", "Baby", "Accessories"],
   },
   {
     name: "Footwear",
     subcategories: ["Sneakers", "Boots", "Sandals", "Flats", "Heels"],
-  },
-  {
-    name: "Accessories",
-    subcategories: [
-      "Bags",
-      "Belts",
-      "Hats",
-      "Scarves",
-      "Jewelry",
-      "Sunglasses",
-    ],
-  },
-  {
-    name: "Underwear",
-    subcategories: ["Men's Underwear", "Women's Underwear", "Socks"],
-  },
-  {
-    name: "Swimwear",
-    subcategories: ["Men's Swimwear", "Women's Swimwear", "Kids' Swimwear"],
-  },
-  {
-    name: "Athletic Wear",
-    subcategories: [
-      "Activewear",
-      "Sports Bras",
-      "Yoga Pants",
-      "Running Shorts",
-    ],
-  },
-  {
-    name: "Maternity Clothing",
-    subcategories: ["Tops", "Bottoms", "Dresses", "Maternity Underwear"],
-  },
-  {
-    name: "Formal Wear",
-    subcategories: [
-      "Men's Formal Wear",
-      "Women's Formal Wear",
-      "Evening Gowns",
-      "Tuxedos",
-    ],
   },
 ];
 
