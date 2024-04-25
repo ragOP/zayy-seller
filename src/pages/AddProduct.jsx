@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+
 const categoriesData = [
   {
     name: "Men's Clothing",
@@ -86,6 +87,7 @@ const AddProduct = () => {
     category: "",
     type: "",
     images: [],
+    description:""
   });
 
   const handleChange = (e) => {
@@ -311,6 +313,7 @@ const AddProduct = () => {
                 className="ms-2 -mt-1"
               />
             </div>
+           
             <div>
               <label
                 htmlFor="totalstock"
@@ -343,6 +346,7 @@ const AddProduct = () => {
                 className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-900 rounded-md py-3 px-2 bg-transparent"
               />
             </div>
+         
             <div>
               <label htmlFor="category">Category:</label>
               <select
@@ -377,7 +381,24 @@ const AddProduct = () => {
                       </option>
                     ))}
               </select>
+              
             </div>
+            <div>
+                  <label
+                    htmlFor="desc"
+                    className="block text-sm font-medium text-gray-750"
+                  >
+                    Description:
+                  </label>
+                  <textarea
+                    id="description"
+                    name="description"
+                    type="text"
+                    value={formData.description}
+                    onChange={handleChange}
+                    className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-100 shadow-sm sm:text-sm border border-gray-900 rounded-md py-2 px-1 bg-transparent"
+                  />
+                </div>
             <div>
               <label
                 htmlFor="images"
@@ -404,6 +425,7 @@ const AddProduct = () => {
                   className="hidden"
                 />
               </div>
+              
               <div className="flex items-center space-x-3 flex-wrap">
                 {formData.images.map((image, index) => (
                   <div key={index} className="relative mt-2">
