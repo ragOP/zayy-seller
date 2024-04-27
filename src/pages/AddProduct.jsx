@@ -22,7 +22,8 @@ const categoriesData = [
     subcategories: ["Sneakers", "Boots", "Sandals", "Flats", "Heels"],
   },
 ];
-
+const colorOptions = ["Red", "Blue", "Green", "Yellow", "Black","Purple","Girl"];
+const sizeOptions = ["XS", "S", "M", "L", "XL","XXL","XXXL"];
 const AddProduct = () => {
   const navigate = useNavigate();
   const fileInputRef = useRef(null);
@@ -41,24 +42,44 @@ const AddProduct = () => {
     category: "",
     type: "",
     images: [],
-    description:""
+    description:"",
+    color:[],
+    size:[]
   });
 
   const handleChange = (e) => {
     const { name, value, type, checked, files } = e.target;
+
     if (type === "file") {
+      // Handle file inputs
       const imagesArray = Array.from(files);
       setFormData((prevState) => ({
         ...prevState,
         [name]: imagesArray,
       }));
+    } else if (type === "checkbox") {
+      // Handle checkboxes for both color and size
+      if (name === "color" || name === "size") {
+        setFormData((prevState) => ({
+          ...prevState,
+          [name]: checked
+            ? [...prevState[name], value]
+            : prevState[name].filter((item) => item !== value),
+        }));
+      } else {
+        setFormData((prevState) => ({
+          ...prevState,
+          [name]: checked,
+        }));
+      }
     } else {
       setFormData((prevState) => ({
         ...prevState,
-        [name]: type === "checkbox" ? checked : value,
+        [name]: value,
       }));
     }
-  };
+};
+  
 
   const handleAddImages = () => {
     fileInputRef.current.click();
@@ -98,7 +119,7 @@ const AddProduct = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formDataForRequest = new FormData();
-
+console.log("FormData",formData)
     for (const key in formData) {
       if (key !== "images") {
         formDataForRequest.append(key, formData[key]);
@@ -338,6 +359,50 @@ const AddProduct = () => {
               
             </div>
             <div>
+  <label className="block text-sm font-medium text-gray-700">
+    Sizes:
+  </label>
+  <div className="mt-1">
+    {sizeOptions.map((size) => (
+      <div key={size}>
+        <label className="inline-flex items-center space-x-2">
+          <input
+            type="checkbox"
+            name="size"
+            value={size}
+            checked={formData.size.includes(size)}
+            onChange={handleChange}
+            className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+          />
+          <span>{size}</span>
+        </label>
+      </div>
+    ))}
+  </div>
+</div>
+<div>
+  <label className="block text-sm font-medium text-gray-700">
+    Colors:
+  </label>
+  <div className="mt-1">
+    {colorOptions.map((color) => (
+      <div key={color}>
+        <label className="inline-flex items-center space-x-2">
+          <input
+            type="checkbox"
+            name="color"
+            value={color}
+            checked={formData.color.includes(color)}
+            onChange={handleChange}
+            className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+          />
+          <span>{color}</span>
+        </label>
+      </div>
+    ))}
+  </div>
+</div>
+            <div>
                   <label
                     htmlFor="desc"
                     className="block text-sm font-medium text-gray-750"
@@ -380,6 +445,7 @@ const AddProduct = () => {
                 />
               </div>
               
+
               <div className="flex items-center space-x-3 flex-wrap">
                 {formData.images.map((image, index) => (
                   <div key={index} className="relative mt-2">
