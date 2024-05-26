@@ -1,28 +1,23 @@
-// DashboardPage.js
-
 import React from "react";
-import Sidebar from "../components/Sidebar"; // Import the Sidebar component
+import Sidebar from "../components/Sidebar";
 import Header from "../components/Header";
+import progress from "../Images/progress.gif";
 
 function DashboardPage() {
   return (
     <div>
       <Header />
-      <div style={contentStyle}>
-        <Sidebar /> {/* Include the Sidebar component here */}
+      <div className="flex">
+        <Sidebar />
         <div style={{ marginLeft: "220px" }}>
-          {" "}
-          {/* Adjust margin to accommodate the sidebar */}
-          {/* Add your dashboard content here */}
           <h2 className="text-center mt-3">Welcome to the Dashboard!</h2>
+          <div className="flex items-center justify-center mt-16">
+            <img className="w-[300px]" src={progress} alt="" />
+          </div>
         </div>
       </div>
     </div>
   );
 }
-
-const contentStyle = {
-  display: "flex",
-};
 
 export default DashboardPage;
