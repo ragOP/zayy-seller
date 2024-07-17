@@ -22,6 +22,9 @@ const RegisterPage = () => {
     accountHolderName: "",
     business_type: "",
     logo: null,
+    upi:"",
+description:"",
+
   });
 
   const navigate = useNavigate();
@@ -341,6 +344,22 @@ const RegisterPage = () => {
                     name="branchName"
                     type="text"
                     value={formData.branchName}
+                    onChange={handleChange}
+                    className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  />
+                </div>
+                   <div>
+                  <label
+                    htmlFor="branchName"
+                    className="block text-sm font-medium text-gray-750"
+                  >
+                    upi:
+                  </label>
+                  <input
+                    id="upi"
+                    name="upi"
+                    type="text"
+                    value={formData.upi}
                     onChange={handleChange}
                     className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                   />
