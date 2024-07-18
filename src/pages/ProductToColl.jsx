@@ -103,12 +103,18 @@ const CollectionDropdown = () => {
             )}
           </select>
 
-          <table className="min-w-full bg-white">
+          <table className="min-w-full bg-white border-collapse border border-gray-300">
             <thead>
               <tr>
-                <th className="py-2 px-4 border-b">Select</th>
-                <th className="py-2 px-4 border-b">Image</th>
-                <th className="py-2 px-4 border-b">Name</th>
+                <th className="bg-gray-100 text-gray-900 border px-4 py-2">Select</th>
+                <th className="bg-gray-100 text-gray-900 border px-4 py-2">Image</th>
+                <th className="bg-gray-100 text-gray-900 border px-4 py-2">Name</th>
+                <th className="bg-gray-100 text-gray-900 border px-4 py-2">Size</th>
+                <th className="bg-gray-100 text-gray-900 border px-4 py-2">Category</th>
+                <th className="bg-gray-100 text-gray-900 border px-4 py-2">Collection Type</th>
+
+
+
               </tr>
             </thead>
             <tbody>
@@ -129,7 +135,12 @@ const CollectionDropdown = () => {
                         className="w-20 h-20 object-cover rounded-full border-1 border-blue-500"
                       />
                     </td>
-                    <td className="py-2 px-4 border-b">{product.name}</td>
+                    <td className="border px-4 py-2 font-semibold">{product.name}</td>
+                    <td className="border px-4 py-2 font-semibold">{product.size}</td>
+                    <td className="border px-4 py-2 font-semibold">{product.category}</td>
+                    <td className="border px-4 py-2 font-semibold">{product.type}</td>
+
+
                   </tr>
                 ))
               ) : (

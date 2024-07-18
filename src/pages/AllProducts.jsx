@@ -64,7 +64,6 @@ const YourComponent = () => {
         <option value="">Select Option</option>
         <option value="approve">Approve</option>
         <option value="pending">Pending</option>
-        {/* Add other options if needed */}
       </select>
       
       <table className="min-w-full bg-white border-collapse border border-gray-200">
@@ -72,7 +71,7 @@ const YourComponent = () => {
           <tr className="bg-gray-100 border-b border-gray-200">
             <th className="py-2 px-4 border-r border-gray-200">Image</th>
             <th className="py-2 px-4 border-r border-gray-200">Name</th>
-            <th className="py-2 px-4 border-r border-gray-200">Category</th>
+            <th className="py-2 px-4 border-r border-gray-200">Status</th>
           </tr>
         </thead>
         <tbody>
@@ -87,8 +86,10 @@ const YourComponent = () => {
                   />
                 </td>
                 <td className="py-2 px-4 border-r border-gray-200">{product.name}</td>
-                <td className="py-2 px-4 border-r border-gray-200">{product.category}</td>
-              </tr>
+                <td className="py-2 px-4 border-r border-gray-200 uppercase" style={{ color: product.status === 'approved' ? 'green' : 'red' }}>
+  {product.status}
+</td>         
+     </tr>
             ))
           ) : (
             <tr>
