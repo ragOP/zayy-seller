@@ -2,6 +2,8 @@ import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Sidebar from "../components/Sidebar";
+import Header from "../components/Header";
 
 
 const categoriesData = [
@@ -183,7 +185,10 @@ console.log("FormData",formData)
         closeButton={false}
         theme="light"
       />
-      <div className="p-8 flex items-center justify-center flex-col bg-[#7d5ffe]">
+            <Header/>
+      <div className="flex">
+      <Sidebar/>
+      <div className="p-8 flex items-center justify-center flex-col bg-[#7d5ffe]" style={{width:"90%",height:"auto"}}>
         <h2 className="text-4xl font-bold mb-4 text-gray-50">Add Product</h2>
         <form
           onSubmit={handleSubmit}
@@ -474,6 +479,8 @@ console.log("FormData",formData)
           </button>
         </form>
       </div>
+      </div>
+
     </>
   );
 };
