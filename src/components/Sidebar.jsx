@@ -13,6 +13,9 @@ function Sidebar() {
       <Link to="/dashboard/collection" className="text-white no-underline mb-4">
         🤵 Add Collection
       </Link>
+      <Link to="/dashboard/prodtocoll" className="text-white no-underline mb-4">
+      📦 Product To Coll
+      </Link>
       {/* <Link to="/dashboard/sellers" className="text-white no-underline mb-4">
         🏪 Seller List
       </Link> */}

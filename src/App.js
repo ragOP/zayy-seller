@@ -9,6 +9,8 @@ import RegisterPage from "./pages/RegisterPage";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import AddCollection from "./pages/AddCollection";
+import ProductToColl from "./pages/ProductToColl";
+import AllProducts from "./pages/AllProducts";
 
 function App() {
   return (
@@ -19,6 +21,10 @@ function App() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/dashboard/customers" element={<AddProduct />} />
         <Route path="/dashboard/collection" element={<AddCollection />} />
+        <Route path="/dashboard/prodtocoll" element={<ProductToColl />} />
+        <Route path="/dashboard/allproducts" element={<AllProducts />} />
+
+
 
       </Routes>
     </Router>
