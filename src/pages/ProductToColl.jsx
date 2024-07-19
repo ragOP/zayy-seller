@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 
-const CollectionDropdown = () => {
+const ProductToColl = () => {
   const [collections, setCollections] = useState([]);
   const [selectedCollection, setSelectedCollection] = useState('');
   const [products, setProducts] = useState([]);
@@ -85,7 +85,7 @@ const CollectionDropdown = () => {
       <Header/>
       <div className="flex">
         <Sidebar/>
-        <div className="p-8 flex-col bg-[#7d5ffe]" style={{ height: "100vh", width: '90%' }}>
+        <div className="p-8 flex-col bg-[white]" style={{ height: "100vh", width: '90%' }}>
           <select
             className="p-3 mb-6 rounded-md border border-gray-300 shadow-md text-lg"
             value={selectedCollection}
@@ -145,7 +145,7 @@ const CollectionDropdown = () => {
                 ))
               ) : (
                 <tr>
-                  <td className="py-2 px-4 border-b" colSpan="3">No products available</td>
+                  <td className="py-2 px-4 border-b" colSpan="3">Loading....</td>
                 </tr>
               )}
             </tbody>
@@ -163,4 +163,4 @@ const CollectionDropdown = () => {
   );
 };
 
-export default CollectionDropdown;
+export default ProductToColl;

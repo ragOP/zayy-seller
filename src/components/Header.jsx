@@ -10,7 +10,10 @@ const Header = () => {
 
   return (
     <header className="bg-gray-900 text-white p-4 flex items-center justify-between">
-      <h2 className="ml-4">Seller Dashboard</h2>
+      <h5 className="ml-4">
+        <Link to="/dashboard" className="text-white no-underline">
+              Sewzee Seller
+            </Link> </h5>
       <nav>
         <ul className="flex items-center gap-3">
           <li className="ml-4">

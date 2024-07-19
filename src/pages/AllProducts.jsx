@@ -56,14 +56,16 @@ const YourComponent = () => {
     <Header/>
     <div className="flex">
       <Sidebar/>
-      <div className="p-8 flex-col bg-[#7d5ffe]" style={{ height: "100vh", width: '90%' }}>
+      <div className="p-8 flex-col bg-[white]" style={{ height: "100vh", width: '90%' }}>
     <div className="overflow-x-auto">
       {error && <p className="text-red-500">{error}</p>}
-      <select id="approvalDropdown" value={selectedOption} onChange={handleDropdownChange}             className="p-3 mb-6 rounded-md border border-gray-300 shadow-md text-lg"
+      <select id="approvalDropdown"
+       value={selectedOption} onChange={handleDropdownChange} 
+       className="p-3 mb-6 rounded-md border border-gray-300 shadow-md text-lg"
       >
         <option value="">Select Option</option>
-        <option value="approve">Approve</option>
-        <option value="pending">Pending</option>
+        <option value="approve" >Approved</option>
+        <option value="pending" >Pending</option>
       </select>
       
       <table className="min-w-full bg-white border-collapse border border-gray-200">
@@ -86,7 +88,7 @@ const YourComponent = () => {
                   />
                 </td>
                 <td className="py-2 px-4 border-r border-gray-200">{product.name}</td>
-                <td className="py-2 px-4 border-r border-gray-200 uppercase" style={{ color: product.status === 'approved' ? 'green' : 'red' }}>
+                <td className="py-2 px-4 border-r border-gray-200 uppercase" style={{ color: product.status === 'approved' ? '#00C000' : 'red' }}>
   {product.status}
 </td>         
      </tr>

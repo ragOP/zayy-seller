@@ -105,8 +105,8 @@ const AddCollection = () => {
       <Header/>
       <div className="flex">
       <Sidebar/>
-            <div className="p-8 flex items-center  flex-col bg-[#7d5ffe]" style={{height:"100vh",width:'90%'}}>
-        <h2 className="text-4xl font-bold mb-4 text-gray-50">Add Collection</h2>
+            <div className="p-8 flex items-center  flex-col bg-[white]" style={{height:"100vh",width:'90%'}}>
+        <h2 className="text-4xl font-bold mb-4 text-gray-900">Add Collection</h2>
         <form
           onSubmit={handleSubmit}
           className="space-y-4 bg-gray-50 py-5 px-3 min-w-fit"

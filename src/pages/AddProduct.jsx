@@ -53,14 +53,12 @@ const AddProduct = () => {
     const { name, value, type, checked, files } = e.target;
 
     if (type === "file") {
-      // Handle file inputs
       const imagesArray = Array.from(files);
       setFormData((prevState) => ({
         ...prevState,
         [name]: imagesArray,
       }));
     } else if (type === "checkbox") {
-      // Handle checkboxes for both color and size
       if (name === "color" || name === "size") {
         setFormData((prevState) => ({
           ...prevState,
@@ -188,13 +186,13 @@ console.log("FormData",formData)
             <Header/>
       <div className="flex">
       <Sidebar/>
-      <div className="p-8 flex items-center justify-center flex-col bg-[#7d5ffe]" style={{width:"90%",height:"auto"}}>
-        <h2 className="text-4xl font-bold mb-4 text-gray-50">Add Product</h2>
+      <div className="p-8 flex items-center justify-center flex-col bg-[white]" style={{width:"90%",height:"auto"}}>
+        <h2 className="text-4xl font-bold mb-4 text-gray-900">Add Product</h2>
         <form
           onSubmit={handleSubmit}
-          className="space-y-4 bg-gray-50 py-5 px-3 min-w-fit"
+          className="space-y-4 bg-gray-50 py-5 px-3 w-full max-w-7xl space-y-6 "
         >
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-3 sm:grid-cols-5 gap-5">
             <div>
               <label
                 htmlFor="name"
