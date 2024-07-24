@@ -80,14 +80,6 @@ function LoginPage() {
                     <h6>GEMS</h6>
                 </div>
             </div>
-          {/* <div className="right-container">
-                    <div className="loginLeftInfo">
-                    <img className="logo" src={logo} alt="Logo" />
-                    <div className="loginLeftTitle">
-                            <h6>Welcome Back to the Sewzee Seller Panel</h6>
-                            <p> Sign In and Get Started!</p>
-                        </div>
-                    </div>          */}
                      <div className="loginLeft" data-aos="fade-right">
                 <div className="loginLeftContainer">
                     <div className="loginLeftInfo">
@@ -114,8 +106,7 @@ function LoginPage() {
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
-              <button type="submit">Login</button>
-              {/* <button onClick={handleregister}>Register</button> */}
+              <button className="loginBtn" type="submit" style={{marginTop:'20px'}}>Login</button>
               <p className='dontHaveAccount'>Don&apos;t have an account? <span onClick={handleregister}>Register</span> </p>
 
 

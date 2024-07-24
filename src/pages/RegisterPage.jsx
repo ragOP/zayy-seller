@@ -33,7 +33,9 @@ description:"",
   });
 
   const navigate = useNavigate();
-
+  const handleBack = () => {
+    navigate(-1); 
+  };
   const handleChange = (e) => {
     const { name, value, files } = e.target;
     if (name === "logo" && files[0]) {
@@ -120,6 +122,7 @@ description:"",
         theme="light"
       />
         <div className="OnboardingWrapper">
+        <button onClick={handleBack} className="onboardingLogoUploadBtn">Back to Login </button>
         <div className="OnboardingHeader">
                 <div className="OnboardingHeaderContent">
                     <h1>Tell Us About Your <span> </span></h1>
@@ -399,7 +402,7 @@ description:"",
                     htmlFor="branchName"
                     className="block text-sm font-medium text-gray-750"
                   >
-                    UPI:
+                    UPI ID:
                   </label>
                   <input
                     id="upi"

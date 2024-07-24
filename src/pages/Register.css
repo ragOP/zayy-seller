@@ -117,8 +117,8 @@
 .OnboardingLogoInputs img {
     height: 80px;
     width: 80px;
-    border: 1px solid 12px;
-    border-radius: 10px;
+    border: 0.4px solid ;
+    border-radius: 50%;
     overflow: hidden;
     margin-right: 20px;
 }
