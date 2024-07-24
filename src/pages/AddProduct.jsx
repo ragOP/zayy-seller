@@ -13,7 +13,7 @@ const categoriesData = [
   },
   {
     name: "Women",
-    subcategories: ["Dresses", "Tops", "Skirts", "Jeans", "Outerwear", "Suits"],
+    subcategories: ["Dresses", "Tops", "Skirts", "Jeans", "Outerwear", "Suits","Bags"],
   },
   {
     name: "Kids",
@@ -24,8 +24,8 @@ const categoriesData = [
     subcategories: ["Sneakers", "Boots", "Sandals", "Flats", "Heels"],
   },
 ];
-const colorOptions = ["Red", "Blue", "Green", "Yellow", "Black","Purple","Girl"];
-const sizeOptions = ["XS", "S", "M", "L", "XL","XXL","XXXL"];
+const colorOptions = ["Red", "Blue", "Green", "Yellow", "Black","Purple","Girl","Brown"];
+const sizeOptions = ["XS", "S", "M", "L", "XL","XXL","XXXL","One Size","6","7","8"];
 const AddProduct = () => {
   const navigate = useNavigate();
   const fileInputRef = useRef(null);

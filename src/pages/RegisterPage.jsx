@@ -1,9 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useRef  } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "./Register.css";
+import { sewzeeImages } from "../Images";
 
 const RegisterPage = () => {
+  const [isUploading, setIsUploading] = useState(false);
+  const [percentUpload, setPercentUpload] = useState(0);
+  const imgRef = useRef(null);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -31,9 +36,22 @@ description:"",
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
-    if (name === "logo") {
+    if (name === "logo" && files[0]) {
       const logoFile = files[0];
-      setFormData({ ...formData, logo: logoFile });
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setFormData({ ...formData, logo: reader.result });
+        setIsUploading(false);
+        setPercentUpload(100);
+      };
+      reader.onprogress = (event) => {
+        if (event.lengthComputable) {
+          const percentComplete = Math.round((event.loaded / event.total) * 100);
+          setPercentUpload(percentComplete);
+        }
+      };
+      setIsUploading(true);
+      reader.readAsDataURL(logoFile);
     } else {
       setFormData({ ...formData, [name]: value });
     }
@@ -101,18 +119,46 @@ description:"",
         hideProgressBar={false}
         theme="light"
       />
-      <div className="bg-[#7d5ffe] py-8 px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-center flex-col">
-          <h2 className="text-3xl font-semibold text-center mb-8 text-gray-50">
-            Seller Registration
-          </h2>
+        <div className="OnboardingWrapper">
+        <div className="OnboardingHeader">
+                <div className="OnboardingHeaderContent">
+                    <h1>Tell Us About Your <span> </span></h1>
+                    <p>We just need to know a few more things. </p>
+                    <div className="OnboardingHeaderDots">
+                        <div className="headerDots"></div>
+                        <div className="headerDots"></div>
+                        <div className="headerDots"></div>
+                        <div className="headerDots"></div>
+                    </div>
+                </div>
+            </div>
           <form
             onSubmit={handleSubmit}
-            className="space-y-6 bg-gray-50 px-8 py-5 min-w-fit"
+            className="OnboardingInformationWrapper"
           >
-            <div className="space-y-6">
-              <div className="grid grid-cols-2 gap-4">
-                <div>
+                <div className="OnboardingGenarelInformation">
+                <h6> General Information</h6>
+
+                <div className="OnboardingInputWrapper"> 
+                <div className="OnboardingLogoInputs">
+                <img src={formData?.logo || sewzeeImages.DummyLogo} alt="logo" />
+
+                <label
+        onClick={() => imgRef.current.click()}
+        className="onboardingLogoUploadBtn"
+      >
+        {isUploading ? `${percentUpload}%` : formData?.logo ? "Upload Again" : "Upload"}
+      </label>
+      <input
+        id="logo"
+        name="logo"
+        type="file"
+        ref={imgRef}
+        onChange={handleChange}
+        hidden
+      />
+              </div> 
+                                <div>
                   <label
                     htmlFor="email"
                     className="block text-sm font-medium text-gray-750"
@@ -145,8 +191,8 @@ description:"",
                   />
                 </div>
               </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div>
+              <div className="OnboardingInputs">
+                <div class>
                   <label
                     htmlFor="name"
                     className="block text-sm font-medium text-gray-750"
@@ -179,7 +225,7 @@ description:"",
                   />
                 </div>
               </div>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="OnboardingInputs">
                 <div>
                   <label
                     htmlFor="pincode"
@@ -213,7 +259,7 @@ description:"",
                   />
                 </div>
               </div>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="OnboardingInputs">
                 <div>
                   <label
                     htmlFor="locality"
@@ -247,7 +293,7 @@ description:"",
                   />
                 </div>
               </div>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="OnboardingInputs">
                 <div>
                   <label
                     htmlFor="state"
@@ -281,7 +327,7 @@ description:"",
                   />
                 </div>
               </div>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="OnboardingInputs">
                 <div>
                   <label
                     htmlFor="accountNo"
@@ -315,7 +361,7 @@ description:"",
                   />
                 </div>
               </div>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="OnboardingInputs">
                 <div>
                   <label
                     htmlFor="bankName"
@@ -353,7 +399,7 @@ description:"",
                     htmlFor="branchName"
                     className="block text-sm font-medium text-gray-750"
                   >
-                    upi:
+                    UPI:
                   </label>
                   <input
                     id="upi"
@@ -369,7 +415,7 @@ description:"",
                     htmlFor="branchName"
                     className="block text-sm font-medium text-gray-750"
                   >
-                    description:
+                    Description:
                   </label>
                   <input
                     id="description"
@@ -381,7 +427,7 @@ description:"",
                   />
                 </div>
               </div>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="OnboardingInputs">
                 <div>
                   <label
                     htmlFor="accountHolderName"
@@ -412,36 +458,22 @@ description:"",
                     onChange={handleChange}
                     className="mt-1 focus:ring-indigo-500 focus:border-indigo-300 block w-full shadow-sm sm:text-sm border border-gray-900 rounded-md py-2.5 px-2 bg-transparent"
                   >
-                    <option value="brand">brand</option>
-                    <option value="boutique">boutique</option>
+                    <option value="brand">Brand</option>
+                    <option value="boutique">Boutique</option>
                   </select>
                 </div>
               </div>
-              <div>
-                <label
-                  htmlFor="image"
-                  className="block text-sm font-medium text-gray-750"
-                >
-                  Image:
-                </label>
-                <input
-                  id="logo"
-                  name="logo"
-                  type="file"
-                  onChange={handleChange}
-                  className="mt-1 block w-full border-gray-300"
-                />
-              </div>
+            
             </div>
             <button
               type="submit"
-              className="w-full flex justify-center py-3 px-4 shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              className="OnboardingBtn"
             >
               Register
             </button>
+
           </form>
         </div>
-      </div>
     </>
   );
 };

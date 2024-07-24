@@ -8,10 +8,10 @@ function Sidebar() {
         🤵 Customer List
       </Link> */}
       <Link to="/dashboard/customers" className="text-white no-underline mb-4">
-        🤵 Add Product
+      🛍️ Add Product
       </Link>
       <Link to="/dashboard/collection" className="text-white no-underline mb-4">
-        🤵 Add Collection
+      🗃️ Add Collection
       </Link>
       <Link to="/dashboard/prodtocoll" className="text-white no-underline mb-4">
       📦 Product To Coll

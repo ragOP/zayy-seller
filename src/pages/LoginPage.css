@@ -1,64 +1,103 @@
-LoginPage.css
 
 .logo {
   width: 100px;
-  margin-bottom: 20px; /* Adjust as needed */
-}.login-page {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  margin-bottom: 20px;
+}
+  .loginWrapper {
+    display: flex;
+    align-items: center;
+    height: 100vh;
+}
+.loginRight {
+  flex: 1;
   height: 100vh;
-  background-color:#7d5ffe ; /* Background color for the entire page */
+  background: url("../Images/loginbg.png");
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.container {
+.loginRightContent {
   width: 80%;
-  display: flex;
+  height: 50%;
+  padding: 30px 10px;
+  background-color: rgba(248, 248, 248, 0.13);
+  border-radius: 4px;
 }
 
-.left-container {
-  flex: 1; /* Equal width for both containers */
-  padding: 20px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Shadow effect */
-  background-color:rgba(255, 255, 255, 0.5)	; /* Lighter background color */
-  text-align: center;
+.loginRightContent p {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 20px;
+  color:white;
+  margin-bottom: 15px;
+}
+
+.loginRightContent h6 {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 50px;
+  line-height: 50px;
+  color: white;
+  margin-bottom: 15px;
+}
+
+.loginLeft {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loginLeftContainer {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height:60vh;
-  width: 50;
+
 }
 
-.right-container {
-  flex: 1; /* Equal width for both containers */
-  padding: 20px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-  background-color: rgba(255, 255, 255, 0.9); /* Lighter background color */
-  text-align: center;
+
+.loginLeftInfo {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-}
-
-h2 {
+  text-align: center;
   margin-bottom: 20px;
 }
 
-form {
-  width: 100%;
-  max-width: 300px;
-}
-
-.form-group {
+.loginLeftInfo img {
+  width: 100px;
+  height: 100%;
   margin-bottom: 15px;
-  text-align: center;
 }
 
-label {
-  display: block;
-  margin-bottom: 5px;
+.loginLeftTitle {
+  display: flex;
+  flex-direction: column;
+}
+
+.loginLeftTitle h6 {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 20px;
+  margin-bottom: 20px;
+  color: var(--black);
+}
+
+.loginLeftTitle p {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 26px;
+  line-height: 20px;
+  color: #7d5ffe;
+  margin-bottom: 1rem;
+}
+
+.loginLeftInput {
+  margin-bottom: 20px;
+  position: relative;
 }
 
 input[type="text"],
@@ -82,4 +121,18 @@ button {
 
 button:hover {
   background-color: #0056b3;
+}
+.dontHaveAccount {
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  color: black;
+  margin-bottom: 20px;
+}
+
+.dontHaveAccount span {
+  color:#7d5ffe;
+  cursor: pointer;
 }

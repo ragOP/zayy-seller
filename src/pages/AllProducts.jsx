@@ -74,6 +74,7 @@ const YourComponent = () => {
             <th className="py-2 px-4 border-r border-gray-200">Image</th>
             <th className="py-2 px-4 border-r border-gray-200">Name</th>
             <th className="py-2 px-4 border-r border-gray-200">Status</th>
+            
           </tr>
         </thead>
         <tbody>
@@ -84,7 +85,7 @@ const YourComponent = () => {
                   <img
                     src={product.images[0]}
                     alt={product.name}
-                    className="w-20 h-20 object-cover rounded-full border-2 border-blue-500"
+                    className="w-20 h-20 object-cover rounded-full border-1 border-blue-500"
                   />
                 </td>
                 <td className="py-2 px-4 border-r border-gray-200">{product.name}</td>

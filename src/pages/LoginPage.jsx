@@ -71,20 +71,35 @@ function LoginPage() {
         closeButton={false}
         theme="light"
       />
-      <div className="login-page">
-        <div className="container">
-          <div className="left-container">
-            <img className="logo" src={logo} alt="Logo" />{" "}
-            {/* Insert the logo */}
-            <h2>Welcome Back!</h2>
-            <p>Please login to continue.</p>
-            <button onClick={handleregister}>Register</button>
-          </div>
-          <div className="right-container">
-            <h2>Login</h2>
-            <form onSubmit={handleLogin}>
-              <div className="form-group">
-                <label>Username:</label>
+     <div className="loginWrapper">
+            <div className="loginRight" data-aos="fade-left" >
+                <div className='loginRightContent'>
+                    <p>Revolutionize Shopping:</p>
+                    <h6>DISCOVER</h6>
+                    <h6>LOCAL FASHION</h6>
+                    <h6>GEMS</h6>
+                </div>
+            </div>
+          {/* <div className="right-container">
+                    <div className="loginLeftInfo">
+                    <img className="logo" src={logo} alt="Logo" />
+                    <div className="loginLeftTitle">
+                            <h6>Welcome Back to the Sewzee Seller Panel</h6>
+                            <p> Sign In and Get Started!</p>
+                        </div>
+                    </div>          */}
+                     <div className="loginLeft" data-aos="fade-right">
+                <div className="loginLeftContainer">
+                    <div className="loginLeftInfo">
+                        <img src={logo} alt="sewzee Logo" />
+                        <div className="loginLeftTitle">
+                            <h6>Welcome Back to the Sewzee Seller Panel</h6>
+                            <p> Sign In and Get Started!</p>
+                        </div>
+                    </div>
+                       <form onSubmit={handleLogin}>
+                       <div className='loginLeftInput'>
+                       <label>Username:</label>
                 <input
                   type="text"
                   value={username}
@@ -100,10 +115,15 @@ function LoginPage() {
                 />
               </div>
               <button type="submit">Login</button>
+              {/* <button onClick={handleregister}>Register</button> */}
+              <p className='dontHaveAccount'>Don&apos;t have an account? <span onClick={handleregister}>Register</span> </p>
+
+
             </form>
           </div>
         </div>
-      </div>
+        </div>
+
     </>
   );
 }
