@@ -12,8 +12,9 @@
 .loginRight {
   flex: 1;
   height: 100vh;
-  /* background: url("../Images/107_generated.jpg"); */
+  background: url("../Images/107_generated.jpg");
   background-repeat: no-repeat;
+  background-size: cover;
   display: flex;
   align-items: center;
   justify-content: center;

@@ -75,12 +75,7 @@ function LoginPage() {
       />
       <div className="loginWrapper">
         <div className="loginRight" data-aos="fade-left">
-          <img src={bg} alt="" style={{
-  backgroundSize: 'contain',
-  height:'100%',
-  width:'100%'
-
-          }}/>
+       
           {/* <div className='loginRightContent'>
                     <p>Revolutionize Shopping:</p>
                     <h6>DISCOVER</h6>
