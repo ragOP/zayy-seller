@@ -102,83 +102,88 @@ const AddCollection = () => {
   return (
     <>
       <ToastContainer position="bottom-right" autoClose={5000} theme="light" />
-      <Header/>
+      <Header />
       <div className="flex">
-      <Sidebar/>
-            <div className="p-8 flex items-center  flex-col bg-[white]" style={{height:"100vh",width:'90%'}}>
-        <h2 className="text-4xl font-bold mb-4 text-gray-900">Add Collection</h2>
-        <form
-          onSubmit={handleSubmit}
-          className="space-y-4 bg-gray-50 py-5 px-3 min-w-fit"
+        <Sidebar />
+        <div
+          className="p-8 flex items-center  flex-col bg-[white]"
+          style={{ height: "100vh", width: "90%" }}
         >
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label
-                htmlFor="name"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Name:
-              </label>
-              <input
-                id="name"
-                name="name"
-                type="text"
-                value={formData.name}
-                onChange={handleChange}
-                className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-900 rounded-md py-3 px-2"
-              />
-            </div>
-            <div>
-              <label
-                htmlFor="image"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Collection Image:
-              </label>
-              <div className="mt-1 flex">
-                <button
-                  type="button"
-                  onClick={handleAddImage}
-                  className="py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          <h2 className="text-4xl font-bold mb-4 text-gray-900">
+            Add Collection
+          </h2>
+          <form
+            onSubmit={handleSubmit}
+            className="space-y-4 bg-gray-50 py-5 px-3 min-w-fit"
+          >
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label
+                  htmlFor="name"
+                  className="block text-sm font-medium text-gray-700"
                 >
-                  Add Image
-                </button>
+                  Name:
+                </label>
                 <input
-                  type="file"
-                  id="image"
-                  name="image"
-                  accept="image/*"
-                  ref={fileInputRef}
+                  id="name"
+                  name="name"
+                  type="text"
+                  value={formData.name}
                   onChange={handleChange}
-                  className="hidden"
+                  className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-900 rounded-md py-3 px-2"
                 />
               </div>
-              {formData.image && (
-                <div className="relative mt-2">
-                  <img
-                    src={URL.createObjectURL(formData.image)}
-                    alt="Product"
-                    className="h-24 w-24 object-cover rounded-md"
-                  />
+              <div>
+                <label
+                  htmlFor="image"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Collection Image:
+                </label>
+                <div className="mt-1 flex">
                   <button
                     type="button"
-                    onClick={handleDeleteImage}
-                    className="absolute top-0 right-0 bg-gray-500 hover:bg-red-600 text-white rounded-full h-6 w-6 flex items-center justify-center text-xs"
+                    onClick={handleAddImage}
+                    className="py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                   >
-                    X
+                    Add Image
                   </button>
+                  <input
+                    type="file"
+                    id="image"
+                    name="image"
+                    accept="image/*"
+                    ref={fileInputRef}
+                    onChange={handleChange}
+                    className="hidden"
+                  />
                 </div>
-              )}
+                {formData.image && (
+                  <div className="relative mt-2">
+                    <img
+                      src={URL.createObjectURL(formData.image)}
+                      alt="Product"
+                      className="h-24 w-24 object-cover rounded-md"
+                    />
+                    <button
+                      type="button"
+                      onClick={handleDeleteImage}
+                      className="absolute top-0 right-0 bg-gray-500 hover:bg-red-600 text-white rounded-full h-6 w-6 flex items-center justify-center text-xs"
+                    >
+                      X
+                    </button>
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
-          <button
-            type="submit"
-            className="mt-4 w-full flex justify-center py-3 px-4 border border-transparent shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-          >
-            Submit
-          </button>
-        </form>
-      </div>
+            <button
+              type="submit"
+              className="mt-4 w-full flex justify-center py-3 px-4 border border-transparent shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            >
+              Submit
+            </button>
+          </form>
+        </div>
       </div>
     </>
   );

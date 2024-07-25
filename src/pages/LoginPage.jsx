@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./LoginPage.css";
 import logo from "../Images/Sewzeelogo..png";
+import bg from "../Images/107_generated.jpg";
+
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -71,31 +73,39 @@ function LoginPage() {
         closeButton={false}
         theme="light"
       />
-     <div className="loginWrapper">
-            <div className="loginRight" data-aos="fade-left" >
-                <div className='loginRightContent'>
+      <div className="loginWrapper">
+        <div className="loginRight" data-aos="fade-left">
+          <img src={bg} alt="" style={{
+  backgroundSize: 'contain',
+  height:'100%',
+  width:'100%'
+
+          }}/>
+          {/* <div className='loginRightContent'>
                     <p>Revolutionize Shopping:</p>
                     <h6>DISCOVER</h6>
                     <h6>LOCAL FASHION</h6>
                     <h6>GEMS</h6>
-                </div>
+                </div> */}
+        </div>
+        <div className="loginLeft" data-aos="fade-right">
+          <div className="loginLeftContainer">
+            <div className="loginLeftInfo">
+              <img src={logo} alt="sewzee Logo" />
+              <div className="loginLeftTitle">
+                <h6>Welcome Back to the Sewzee Seller Panel</h6>
+                <p> Login and Get Started!</p>
+              </div>
             </div>
-                     <div className="loginLeft" data-aos="fade-right">
-                <div className="loginLeftContainer">
-                    <div className="loginLeftInfo">
-                        <img src={logo} alt="sewzee Logo" />
-                        <div className="loginLeftTitle">
-                            <h6>Welcome Back to the Sewzee Seller Panel</h6>
-                            <p> Sign In and Get Started!</p>
-                        </div>
-                    </div>
-                       <form onSubmit={handleLogin}>
-                       <div className='loginLeftInput'>
-                       <label>Username:</label>
+            <form onSubmit={handleLogin}>
+              <div className="loginLeftInput">
+                <label>Username:</label>
                 <input
                   type="text"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
+                  required
+                  placeholder="Enter your username*"
                 />
               </div>
               <div className="form-group">
@@ -104,17 +114,26 @@ function LoginPage() {
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  required
+                  placeholder="Enter your password*"
+
                 />
               </div>
-              <button className="loginBtn" type="submit" style={{marginTop:'20px'}}>Login</button>
-              <p className='dontHaveAccount'>Don&apos;t have an account? <span onClick={handleregister}>Register</span> </p>
-
-
+              <button
+                className="loginBtn"
+                type="submit"
+                style={{ marginTop: "20px" }}
+              >
+                Login
+              </button>
+              <p className="dontHaveAccount">
+                Don&apos;t have an account?{" "}
+                <span onClick={handleregister}>Register</span>{" "}
+              </p>
             </form>
           </div>
         </div>
-        </div>
-
+      </div>
     </>
   );
 }

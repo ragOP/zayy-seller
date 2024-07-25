@@ -19,6 +19,9 @@ function Sidebar() {
       <Link to="/dashboard/allproducts" className="text-white no-underline mb-4">
       📦  All Products
       </Link>
+      <Link to="/dashboard/allorders" className="text-white no-underline mb-4">
+      📦  All Orders
+      </Link>
       {/* <Link to="/dashboard/sellers" className="text-white no-underline mb-4">
         🏪 Seller List
       </Link> */}

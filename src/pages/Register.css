@@ -1,10 +1,11 @@
 .OnboardingWrapper {
-    padding: 30px;
+    padding: 20px;
     display: flex;
     justify-content: center;
     flex-direction: column;
+    width: '100%';
+   
 }
-
 .OnboardingHeader {
     display: flex;
     justify-content: center;
@@ -173,14 +174,19 @@
 }
 
 .OnboardingBtn {
-    width: 30%;
-    height: 50px;
+   
     background-color: #7d5ffe;
     border: none;
     color: white;
     outline: none;
-    text-align: center;
-    justify-content: center;
+    border-radius: 8px;
+    line-height: 20px;
+    font-weight: 600;
+    min-width: 96px;
+    width: fit-content;
+    cursor: pointer;
+    white-space: nowrap;
+    padding: 8px 16px;
 }
 
 .onboardingLogoUploadBtn {
@@ -198,7 +204,21 @@
     background-color: #7d5ffe;
     text-align: center;
 }
-
+.backloginBtn {
+    padding: 4px 15px;
+    width: 120px;
+    height: 30px;
+    line-height: 22px;
+    font-style: normal;
+    color: #7d5ffe;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 20px;
+    background-color: white;
+    text-align: center;
+    border: 2px;
+    border-color: black;
+}
 
 .OnboardingModalTitle {
     font-size: 16px;
@@ -239,3 +259,20 @@
 
 
 
+.haveAccount {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    font-size: 16px;
+    line-height: 30px;
+    color: black;
+    margin-bottom: 20px;
+    padding-left: 60px;
+
+  }
+  
+  .haveAccount span {
+    color:#7d5ffe;
+    cursor: pointer;
+    font-weight: 600;
+   
+  }

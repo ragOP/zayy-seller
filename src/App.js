@@ -11,6 +11,7 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import AddCollection from "./pages/AddCollection";
 import ProductToColl from "./pages/ProductToColl";
 import AllProducts from "./pages/AllProducts";
+import AllOrders from "./pages/AllOrders";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/dashboard/collection" element={<AddCollection />} />
         <Route path="/dashboard/prodtocoll" element={<ProductToColl />} />
         <Route path="/dashboard/allproducts" element={<AllProducts />} />
+        <Route path="/dashboard/allorders" element={<AllOrders />} />
 
 
 
