@@ -63,7 +63,7 @@ const AllProducts = () => {
        value={selectedOption} onChange={handleDropdownChange} 
        className="p-3 mb-6 rounded-md border border-gray-300 shadow-md text-lg"
       >
-        <option value="">Select Option</option>
+        <option value="">Select Options</option>
         <option value="approve" >Approved</option>
         <option value="pending" >Pending</option>
       </select>
