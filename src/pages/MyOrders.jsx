@@ -66,8 +66,8 @@ const MyOrders = () => {
 
   const groupedOrders = groupOrdersByOrderId(orders);
 
-  const handleViewDetails = (product, address, status,orderId) => {
-    navigate('/myorders/order-detail', { state: { product, address, status,orderId } });
+  const handleViewDetails = (product, address, status) => {
+    navigate('/myorders/order-detail', { state: { product, address, status, } });
   };
 
   return (
@@ -92,16 +92,13 @@ const MyOrders = () => {
             <table className="min-w-full bg-white border-collapse border border-gray-200">
               <thead>
                 <tr className="bg-gray-100 border-b border-gray-200">
-                  {/* <th className="py-2 px-4 border-r border-gray-200">Order ID</th> */}
                   <th className="py-2 px-4 border-r border-gray-200">Products</th>
-                  <th className="py-2 px-4 border-r border-gray-200">Status</th>
                 </tr>
               </thead>
               <tbody>
                 {Object.keys(groupedOrders).length > 0 ? (
                   Object.keys(groupedOrders).map((orderId) => (
                     <tr key={orderId} className="border-b border-gray-200">
-                      {/* <td className="py-2 px-4 border-r border-gray-200">{orderId}</td> */}
                       <td className="py-2 px-4 border-r border-gray-200">
                         {groupedOrders[orderId].map((order) => (
                           <div key={order._id}>
@@ -109,11 +106,14 @@ const MyOrders = () => {
                               <thead>
                                 <tr className="bg-gray-100 border-b border-gray-200">
                                 <th className="py-2 px-4 border-r border-gray-200">Order ID</th>
+
                                   <th className="py-2 px-4 border-r border-gray-200">Product Name</th>
                                   <th className="py-2 px-4 border-r border-gray-200">Quantity</th>
                                   <th className="py-2 px-4 border-r border-gray-200">Color</th>
                                   <th className="py-2 px-4 border-r border-gray-200">Size</th>
                                   <th className="py-2 px-4 border-r border-gray-200">Action</th>
+                                  <th className="py-2 px-4 border-r border-gray-200">Status</th>
+
                                 </tr>
                               </thead>
                               <tbody>
@@ -133,6 +133,12 @@ const MyOrders = () => {
                                         View 
                                       </button>
                                     </td>
+                                    <td
+                        className="py-2 px-4 border-r border-gray-200 uppercase"
+                        style={{ color: groupedOrders[orderId][0].status === 'pending' ? 'orange' : 'red' }}
+                      >
+                        {groupedOrders[orderId][0].status}
+                      </td>
                                   </tr>
                                 ))}
                               </tbody>
@@ -140,12 +146,12 @@ const MyOrders = () => {
                           </div>
                         ))}
                       </td>
-                      <td
+                      {/* <td
                         className="py-2 px-4 border-r border-gray-200 uppercase"
                         style={{ color: groupedOrders[orderId][0].status === 'pending' ? 'orange' : 'red' }}
                       >
                         {groupedOrders[orderId][0].status}
-                      </td>
+                      </td> */}
                     </tr>
                   ))
                 ) : (
