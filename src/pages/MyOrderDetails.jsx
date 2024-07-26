@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 
 const MyOrderDetails = () => {
   const { state } = useLocation();
-  const { product, address } = state || {};
+  const { product } = state || {};
 
   if (!product) {
     return (
@@ -22,6 +22,8 @@ const MyOrderDetails = () => {
     // Add logic to reject the product
     alert('Product rejected');
   };
+
+  const address = product.address || {};
 
   return (
     <div className="max-w-4xl mx-auto p-8 bg-white shadow-lg rounded-lg">
@@ -55,12 +57,13 @@ const MyOrderDetails = () => {
             {product.productDetail.onsale && (
               <p className="text-gray-700 mb-2"><span className="font-medium">Sale Price:</span> {product.productDetail.salesprice}</p>
             )}
+            <p className="text-gray-700 mb-2"><span className="font-medium">Stock:</span> {product.productDetail.instock} / {product.productDetail.totalstock}</p>
             <p className="text-gray-700 mb-2"><span className="font-medium">Category:</span> {product.productDetail.category}</p>
             <p className="text-gray-700 mb-2"><span className="font-medium">Type:</span> {product.productDetail.type}</p>
           </div>
           <div className="bg-gray-100 p-4 rounded-lg mb-6">
             <h2 className="text-xl font-semibold mb-2">Additional Information</h2>
-            {address ? (
+            {Object.keys(address).length > 0 ? (
               <>
                 <p className="text-gray-700 mb-2"><span className="font-medium">Pincode:</span> {address.pincode}</p>
                 <p className="text-gray-700 mb-2"><span className="font-medium">Address:</span> {address.address}</p>
@@ -75,23 +78,19 @@ const MyOrderDetails = () => {
           </div>
         </div>
       </div>
-      {product.status === 'pending' && (
-        <div className="mt-6 flex space-x-4">
-          <button
-            onClick={handleApprove}
-            className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500"
-          >
-            Approve
-          </button>
-          <button
-            onClick={handleReject}
-            className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500"
-          >
-            Reject
-          </button>
-        </div>
-      )}
-      <div className="mt-6">
+      <div className="mt-6 flex space-x-4">
+        <button
+          onClick={handleApprove}
+          className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500"
+        >
+          Approve
+        </button>
+        <button
+          onClick={handleReject}
+          className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500"
+        >
+          Reject
+        </button>
         <button
           onClick={() => window.history.back()}
           className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"

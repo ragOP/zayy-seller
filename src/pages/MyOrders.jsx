@@ -66,8 +66,8 @@ const MyOrders = () => {
 
   const groupedOrders = groupOrdersByOrderId(orders);
 
-  const handleViewDetails = (product, address, status) => {
-    navigate('/myorders/order-detail', { state: { product, address, status } });
+  const handleViewDetails = (product, address, status,orderId) => {
+    navigate('/myorders/order-detail', { state: { product, address, status,orderId } });
   };
 
   return (
@@ -92,7 +92,7 @@ const MyOrders = () => {
             <table className="min-w-full bg-white border-collapse border border-gray-200">
               <thead>
                 <tr className="bg-gray-100 border-b border-gray-200">
-                  <th className="py-2 px-4 border-r border-gray-200">Order ID</th>
+                  {/* <th className="py-2 px-4 border-r border-gray-200">Order ID</th> */}
                   <th className="py-2 px-4 border-r border-gray-200">Products</th>
                   <th className="py-2 px-4 border-r border-gray-200">Status</th>
                 </tr>
@@ -101,13 +101,14 @@ const MyOrders = () => {
                 {Object.keys(groupedOrders).length > 0 ? (
                   Object.keys(groupedOrders).map((orderId) => (
                     <tr key={orderId} className="border-b border-gray-200">
-                      <td className="py-2 px-4 border-r border-gray-200">{orderId}</td>
+                      {/* <td className="py-2 px-4 border-r border-gray-200">{orderId}</td> */}
                       <td className="py-2 px-4 border-r border-gray-200">
                         {groupedOrders[orderId].map((order) => (
                           <div key={order._id}>
                             <table className="min-w-full bg-white border-collapse border border-gray-200 mb-2">
                               <thead>
                                 <tr className="bg-gray-100 border-b border-gray-200">
+                                <th className="py-2 px-4 border-r border-gray-200">Order ID</th>
                                   <th className="py-2 px-4 border-r border-gray-200">Product Name</th>
                                   <th className="py-2 px-4 border-r border-gray-200">Quantity</th>
                                   <th className="py-2 px-4 border-r border-gray-200">Color</th>
@@ -118,6 +119,8 @@ const MyOrders = () => {
                               <tbody>
                                 {order.products.map((product) => (
                                   <tr key={product._id} className="border-b border-gray-200">
+                                <td className="py-2 px-4 border-r border-gray-200">{orderId}</td>
+
                                     <td className="py-2 px-4 border-r border-gray-200">{product.productDetail.name}</td>
                                     <td className="py-2 px-4 border-r border-gray-200">{product.quantity}</td>
                                     <td className="py-2 px-4 border-r border-gray-200">{product.colorname}</td>
@@ -125,7 +128,7 @@ const MyOrders = () => {
                                     <td className="py-2 px-4 border-r border-gray-200">
                                       <button
                                         onClick={() => handleViewDetails(product, order.address, order.status)}
-                                        className="bg-blue-800 text-white p-2 rounded"
+                                        className="bg-blue-800 text-white p- rounded"
                                       >
                                         View 
                                       </button>
