@@ -66,8 +66,8 @@ const MyOrders = () => {
 
   const groupedOrders = groupOrdersByOrderId(orders);
 
-  const handleViewDetails = (product) => {
-    navigate('/myorders/order-detail', { state: { product } });
+  const handleViewDetails = (product, address, status) => {
+    navigate('/myorders/order-detail', { state: { product, address, status } });
   };
 
   return (
@@ -124,10 +124,10 @@ const MyOrders = () => {
                                     <td className="py-2 px-4 border-r border-gray-200">{product.size}</td>
                                     <td className="py-2 px-4 border-r border-gray-200">
                                       <button
-                                        onClick={() => handleViewDetails(product)}
-                                        className="bg-blue-500 text-white p-2 rounded"
+                                        onClick={() => handleViewDetails(product, order.address, order.status)}
+                                        className="bg-blue-800 text-white p-2 rounded"
                                       >
-                                        View Details
+                                        View 
                                       </button>
                                     </td>
                                   </tr>
