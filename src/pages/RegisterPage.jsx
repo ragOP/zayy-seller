@@ -6,8 +6,7 @@ import "./Register.css";
 import { sewzeeImages } from "../Images";
 import sample from "../Images/bg.mp4";
 const RegisterPage = () => {
-  const [isUploading, setIsUploading] = useState(false);
-  const [percentUpload, setPercentUpload] = useState(0);
+
   const imgRef = useRef(null);
   const [formData, setFormData] = useState({
     email: "",
@@ -26,7 +25,7 @@ const RegisterPage = () => {
     branchName: "",
     accountHolderName: "",
     business_type: "",
-    logo: null,
+    logo:null,
     upi: "",
     description: "",
   });
@@ -39,22 +38,7 @@ const RegisterPage = () => {
     const { name, value, files } = e.target;
     if (name === "logo" && files[0]) {
       const logoFile = files[0];
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setFormData({ ...formData, logo: reader.result });
-        setIsUploading(false);
-        setPercentUpload(100);
-      };
-      reader.onprogress = (event) => {
-        if (event.lengthComputable) {
-          const percentComplete = Math.round(
-            (event.loaded / event.total) * 100
-          );
-          setPercentUpload(percentComplete);
-        }
-      };
-      setIsUploading(true);
-      reader.readAsDataURL(logoFile);
+      setFormData({ ...formData, logo: logoFile });
     } else {
       setFormData({ ...formData, [name]: value });
     }
@@ -62,6 +46,8 @@ const RegisterPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("formData", formData);
+
     let loadingToastId;
     try {
       const formDataForRequest = new FormData();
@@ -77,7 +63,7 @@ const RegisterPage = () => {
         theme: "light",
       });
       const response = await fetch(
-        "https://zayy-backend.onrender.com/api/auth/sellerRegister",
+        // "https://zayy-backend.onrender.com/api/auth/sellerRegister",
         {
           method: "POST",
           body: formDataForRequest,
@@ -99,7 +85,6 @@ const RegisterPage = () => {
         // Registration failed, handle the error
         const errorMessage = await response.text();
         throw new Error(errorMessage);
-        // You may also handle the response body for more detailed error messages
       }
       console.log("formData", formData);
     } catch (error) {
@@ -110,7 +95,6 @@ const RegisterPage = () => {
         type: "error",
         autoClose: 2000,
       });
-      // Handle registration error
     }
   };
 
@@ -122,17 +106,32 @@ const RegisterPage = () => {
         hideProgressBar={false}
         theme="light"
       />
-     
-     <div className="OnboardingWrapper" >
-  <p className="haveAccount" style={{ textAlign: "right", marginRight: "100px" }}  >
-    Already a user ? <span onClick={handleBack} style={{ border: '1px solid #7d5ffe', padding: '5px 10px', borderRadius: '5px', cursor: 'pointer', color: '#7d5ffe' }}>Login</span>
-  </p>
+
+      <div className="OnboardingWrapper">
+        <p
+          className="haveAccount"
+          style={{ textAlign: "right", marginRight: "100px" }}
+        >
+          Already a user?{" "}
+          <span
+            onClick={handleBack}
+            style={{
+              border: "1px solid #7d5ffe",
+              padding: "5px 10px",
+              borderRadius: "5px",
+              cursor: "pointer",
+              color: "#7d5ffe",
+            }}
+          >
+            Login
+          </span>
+        </p>
         <div className="OnboardingHeader">
           <div className="OnboardingHeaderContent">
             <h1>
               Tell Us About Your <span> </span>
             </h1>
-            <p>We just need to know a few more things. </p>
+            <p>We just need to know a few more things.</p>
             <div className="OnboardingHeaderDots">
               <div className="headerDots"></div>
               <div className="headerDots"></div>
@@ -143,12 +142,12 @@ const RegisterPage = () => {
         </div>
         <form onSubmit={handleSubmit} className="OnboardingInformationWrapper">
           <div className="OnboardingGenarelInformation">
-            <h6> General Information</h6>
+            <h6>General Information</h6>
 
             <div className="OnboardingInputWrapper">
               <div className="OnboardingLogoInputs">
                 <img
-                  src={formData?.logo || sewzeeImages.DummyLogo}
+                  src={formData?.logo ? URL.createObjectURL(formData.logo) : sewzeeImages.DummyLogo}
                   alt="logo"
                 />
 
@@ -156,11 +155,7 @@ const RegisterPage = () => {
                   onClick={() => imgRef.current.click()}
                   className="onboardingLogoUploadBtn"
                 >
-                  {isUploading
-                    ? `${percentUpload}%`
-                    : formData?.logo
-                    ? "Upload Again"
-                    : "Upload"}
+                  {formData?.logo ? "Upload Again" : "Upload"}
                 </label>
                 <input
                   id="logo"

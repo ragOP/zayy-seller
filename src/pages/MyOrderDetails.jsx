@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 
 const MyOrderDetails = () => {
   const { state } = useLocation();
-  const { product, address,status } = state || {};
+  const { product, address, status, orderId } = state || {};
 
   if (!product) {
     return (
@@ -18,9 +18,28 @@ const MyOrderDetails = () => {
     alert('Product approved');
   };
 
-  const handleReject = () => {
-    // Add logic to reject the product
-    alert('Product rejected');
+  const handleReject = async () => {
+    try {
+      const response = await fetch('https://zayy-backend.onrender.com/api/seller/cancelOrder', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`, // Add token if needed
+        },
+        body: JSON.stringify({ orderId: orderId }),
+      });
+
+      if (response.ok) {
+        alert('Order rejected successfully');
+        // Handle successful rejection, e.g., redirect or update UI
+      } else {
+        alert('Failed to reject order');
+        // Handle error response
+      }
+    } catch (error) {
+      console.error('Error rejecting order:', error);
+      alert('Error rejecting order');
+    }
   };
 
   return (
@@ -34,7 +53,7 @@ const MyOrderDetails = () => {
                   key={index}
                   src={image}
                   alt={`Product Image ${index + 1}`}
-                  className="w-full h-auto max-w-xs rounded-lg shadow-md"
+                  className="w-48 h-48 rounded-lg shadow-md"
                 />
               ))}
             </div>
@@ -42,7 +61,7 @@ const MyOrderDetails = () => {
             <img
               src="https://via.placeholder.com/400"
               alt="Placeholder"
-              className="w-full h-auto max-w-xs rounded-lg shadow-md"
+              className="w-32 h-32 rounded-lg shadow-md"
             />
           )}
         </div>
@@ -53,7 +72,7 @@ const MyOrderDetails = () => {
             <p className="text-gray-700 mb-2"><span className="font-medium">Description:</span> {product.productDetail.description}</p>
             <p className="text-gray-700 mb-2"><span className="font-medium">Price:</span> ₹{product.productDetail.price}</p>
             {product.productDetail.onsale && (
-              <p className="text-gray-700 mb-2"><span className="font-medium">Sale Price:</span> {product.productDetail.salesprice}</p>
+              <p className="text-gray-700 mb-2"><span className="font-medium">Sale Price:</span> ₹{product.productDetail.salesprice}</p>
             )}
             <p className="text-gray-700 mb-2"><span className="font-medium">Stock:</span> {product.productDetail.instock} / {product.productDetail.totalstock}</p>
             <p className="text-gray-700 mb-2"><span className="font-medium">Category:</span> {product.productDetail.category}</p>
@@ -77,7 +96,7 @@ const MyOrderDetails = () => {
         </div>
       </div>
       <div className="mt-6 flex space-x-4">
-      {status === 'pending' && (
+        {status === 'pending' && (
           <>
             <button
               onClick={handleApprove}
