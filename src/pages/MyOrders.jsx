@@ -4,14 +4,9 @@ import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 
 const MyOrders = () => {
-  const [selectedOption, setSelectedOption] = useState("");
   const [orders, setOrders] = useState([]);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-
-  const handleDropdownChange = (event) => {
-    setSelectedOption(event.target.value);
-  };
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -21,38 +16,31 @@ const MyOrders = () => {
       return;
     }
 
-    let apiUrl = "";
-    if (selectedOption === "cancel") {
-      apiUrl = "https://zayy-backend.onrender.com/api/seller/cancelOrder";
-    } else if (selectedOption === "pending") {
-      apiUrl = "https://zayy-backend.onrender.com/api/seller/pendingOrders";
-    }
+    const apiUrl = "https://zayy-backend.onrender.com/api/seller/approvedOrders";
 
-    if (apiUrl) {
-      fetch(apiUrl, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+    fetch(apiUrl, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to fetch Approved orders");
+        }
+        return response.json();
       })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error(`Failed to fetch ${selectedOption} orders`);
-          }
-          return response.json();
-        })
-        .then((data) => {
-          if (data && data.data) {
-            setOrders(data.data); // Update state with fetched orders
-          } else {
-            setError("No orders found"); // Handle case where no data is returned
-          }
-        })
-        .catch((error) => {
-          console.error(`Error fetching ${selectedOption} orders:`, error);
-          setError(`Error fetching ${selectedOption} orders`);
-        });
-    }
-  }, [selectedOption]); // Depend on selectedOption to trigger effect
+      .then((data) => {
+        if (data && data.data) {
+          setOrders(data.data); 
+        } else {
+          setError("No orders found"); // Handle case where no data is returned
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching Approved orders:", error);
+        setError("Error fetching Approved orders");
+      });
+  }, []);
 
   const groupOrdersByOrderId = (orders) => {
     return orders.reduce((acc, order) => {
@@ -81,16 +69,6 @@ const MyOrders = () => {
         >
           <div className="overflow-x-auto">
             {error && <p className="text-red-500">{error}</p>}
-            <select
-              id="approvalDropdown"
-              value={selectedOption}
-              onChange={handleDropdownChange}
-              className="p-3 mb-6 rounded-md border border-gray-300 shadow-md text-lg"
-            >
-              <option value="">Select Option</option>
-              <option value="cancel">Cancelled</option>
-              <option value="pending">Pending</option>
-            </select>
 
             <table className="min-w-full bg-white border-collapse border border-gray-200">
               <thead>
@@ -113,7 +91,9 @@ const MyOrders = () => {
                                   <th className="py-2 px-4 border-r border-gray-200">
                                     Order ID
                                   </th>
-
+                                  <th className="py-2 px-4 border-r border-gray-200">
+                                    Product Image
+                                  </th>
                                   <th className="py-2 px-4 border-r border-gray-200">
                                     Product Name
                                   </th>
@@ -143,7 +123,13 @@ const MyOrders = () => {
                                     <td className="py-2 px-4 border-r border-gray-200">
                                       {orderId}
                                     </td>
-
+                                    <td className="py-2 px-4 border-r border-gray-200">
+                                      <img
+                                        src={product.productDetail.images[0]}
+                                        alt={product.productDetail.name}
+                                        className="h-16 w-16 object-cover"
+                                      />
+                                    </td>
                                     <td className="py-2 px-4 border-r border-gray-200">
                                       {product.productDetail.name}
                                     </td>
@@ -175,8 +161,8 @@ const MyOrders = () => {
                                       style={{
                                         color:
                                           groupedOrders[orderId][0].status ===
-                                          "pending"
-                                            ? "orange"
+                                          "approved"
+                                            ? "green"
                                             : "red",
                                       }}
                                     >
@@ -189,12 +175,6 @@ const MyOrders = () => {
                           </div>
                         ))}
                       </td>
-                      {/* <td
-                        className="py-2 px-4 border-r border-gray-200 uppercase"
-                        style={{ color: groupedOrders[orderId][0].status === 'pending' ? 'orange' : 'red' }}
-                      >
-                        {groupedOrders[orderId][0].status}
-                      </td> */}
                     </tr>
                   ))
                 ) : (
