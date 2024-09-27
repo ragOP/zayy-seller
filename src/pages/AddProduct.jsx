@@ -186,7 +186,7 @@ console.log("FormData",formData)
             <Header/>
       <div className="flex">
       <Sidebar/>
-      <div className="p-8 flex items-center justify-center flex-col bg-[white]" style={{width:"90%",height:"auto"}}>
+      <div className="p-8 flex items-center justify-center flex-col bg-[white]" style={{width:"90%",height:"auto",marginLeft:'200px'}}>
         <h2 className="text-4xl font-bold mb-4 text-gray-900">Add Product</h2>
         <form
           onSubmit={handleSubmit}

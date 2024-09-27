@@ -56,7 +56,7 @@ const AllProducts = () => {
     <Header/>
     <div className="flex">
       <Sidebar/>
-      <div className="p-8 flex-col bg-[white]" style={{ height: "100vh", width: '90%' }}>
+      <div className="p-8 flex-col bg-[white]"  style={{width:"87%",height:"auto" ,marginLeft:"auto"}}      >
     <div className="overflow-x-auto">
       {error && <p className="text-red-500">{error}</p>}
       <select id="approvalDropdown"

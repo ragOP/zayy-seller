@@ -1,7 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
-import DashboardPage from "./pages/DashboardPage";
 import AddProduct from "./pages/AddProduct";
 import RegisterPage from "./pages/RegisterPage";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -12,14 +11,16 @@ import AllProducts from "./pages/AllProducts";
 import MyOrders from "./pages/MyOrders";
 import MyOrderDetail from "./pages/MyOrderDetails";
 import ProtectedRoute from "./Routes/ProtectedRoute";
+import DashboardPage from "./pages/Dashboard/DashboardPage";
 
 function App() {
   return (
       <Router>
         <Routes>
           <Route path="/" element={<ProtectedRoute element={<LoginPage />} screen="login"/>} />
-          <Route path="/register" element={<ProtectedRoute element={<RegisterPage />} />} />
-          <Route path="/dashboard" element={<ProtectedRoute element={<DashboardPage />} />} />
+          <Route path="/register" element={<RegisterPage/>}/>
+          {/* <Route path="/register" element={<ProtectedRoute element={<RegisterPage />} />} /> */}
+          <Route path="/dashboard" element={<ProtectedRoute element={<DashboardPage/>} />} />
           <Route path="/dashboard/customers" element={<ProtectedRoute element={<AddProduct />} />} />
           <Route path="/dashboard/collection" element={<ProtectedRoute element={<AddCollection />} />} />
           <Route path="/dashboard/prodtocoll" element={<ProtectedRoute element={<ProductToColl />} />} />
