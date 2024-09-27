@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./LoginPage.css";
 import logo from "../Images/Sewzeelogo..png";
-import bg from "../Images/107_generated.jpg";
+// import bg from "../Images/107_generated.jpg";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -29,6 +29,7 @@ function LoginPage() {
         progress: undefined,
         theme: "light",
       });
+
       const response = await fetch(
         "https://zayy-backend.onrender.com/api/auth/sellerLogin",
         {
@@ -38,9 +39,14 @@ function LoginPage() {
         }
       );
 
+      console.log("Received response:", response);
+
       if (response.ok) {
         const data = await response.json();
+        console.log(" Data received:", data);
+
         localStorage.setItem("token", data.token);
+console.log(data,)
         toast.update(loadingToastId, {
           render: "Login successful! Redirecting...",
           type: "success",
@@ -51,11 +57,13 @@ function LoginPage() {
         }, 2000);
       } else {
         const errorMessage = await response.text();
+        console.log("Login failed. Error message:", errorMessage);
         throw new Error(errorMessage);
       }
     } catch (error) {
+      console.log("Caught an error:", error.message);
       const parsedError = JSON.parse(error.message);
-      console.log("Error message:", parsedError.message);
+      console.log("Parsed error message:", parsedError.message);
       toast.update(loadingToastId, {
         render: parsedError.message,
         type: "error",
@@ -75,7 +83,6 @@ function LoginPage() {
       />
       <div className="loginWrapper">
         <div className="loginRight" data-aos="fade-left">
-       
           {/* <div className='loginRightContent'>
                     <p>Revolutionize Shopping:</p>
                     <h6>DISCOVER</h6>
@@ -93,7 +100,7 @@ function LoginPage() {
               </div>
             </div>
             <form onSubmit={handleLogin}>
-              <div className="loginLeftInput">
+              {/* <div className="loginLeftInput">
                 <label>Username:</label>
                 <input
                   type="text"
@@ -102,8 +109,24 @@ function LoginPage() {
                   required
                   placeholder="Enter your username*"
                 />
+              </div> */}
+              <div className="coolinput">
+                <label for="input" className="text">
+                  {" "}
+                  Username:
+                </label>
+                <input
+                  type="text"
+                  placeholder="Enter your username*"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  required
+                  name="input"
+                  className="input"
+                />
+                
               </div>
-              <div className="form-group">
+              {/* <div className="form-group">
                 <label>Password:</label>
                 <input
                   type="password"
@@ -111,8 +134,23 @@ function LoginPage() {
                   onChange={(e) => setPassword(e.target.value)}
                   required
                   placeholder="Enter your password*"
-
                 />
+              </div> */}
+              <div className="coolinput">
+                <label for="input" className="text">
+                  {" "}
+                  Password:
+                </label>
+                <input
+                 type="password"
+                 value={password}
+                 onChange={(e) => setPassword(e.target.value)}
+                 required
+                 placeholder="Enter your password*"
+                  name="input"
+                  className="input"
+                />
+                
               </div>
               <button
                 className="loginBtn"

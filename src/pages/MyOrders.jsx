@@ -101,7 +101,8 @@ const MyOrders = () => {
       <Header />
       <div className="flex">
         <Sidebar />
-        <div className="p-8 flex-col bg-[white]" style={{ height: '100vh', width: '90%' }}>
+        <div className="p-8 flex-col bg-[white]"  style={{width:"87%",height:"auto" ,marginLeft:"auto"}}>
+
           <div className="overflow-x-auto">
             {error && <p className="text-red-500">{error}</p>}
 
@@ -129,7 +130,7 @@ const MyOrders = () => {
                                   <th className="py-2 px-4 border-r border-gray-200">Size</th>
                                   <th className="py-2 px-4 border-r border-gray-200">Action</th>
                                   <th className="py-2 px-4 border-r border-gray-200">Shiprocket</th>
-                                  <th className="py-2 px-4 border-r border-gray-200">Status</th>
+                                  {/* <th className="py-2 px-4 border-r border-gray-200">Status</th> */}
                                 </tr>
                               </thead>
                               <tbody>
@@ -150,7 +151,7 @@ const MyOrders = () => {
                                     <td className="py-2 px-4 border-r border-gray-200">
                                       <button
                                         onClick={() => handleViewDetails(product, order.address, order.status)}
-                                        className="bg-blue-800 text-white p- rounded"
+                                        className="bg-blue-800 text-white p-2 rounded ml-2"
                                       >
                                         View
                                       </button>
@@ -166,14 +167,14 @@ const MyOrders = () => {
                                       </button>
                                       </td>
 
-                                    <td
+                                    {/* <td
                                       className="py-2 px-4 border-r border-gray-200 uppercase"
                                       style={{
                                         color: groupedOrders[orderId][0].status === 'approved' ? 'green' : 'red',
                                       }}
                                     >
                                       {groupedOrders[orderId][0].status}
-                                    </td>
+                                    </td> */}
                                   </tr>
                                 ))}
                               </tbody>

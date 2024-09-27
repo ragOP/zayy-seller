@@ -161,7 +161,8 @@ const ProductToColl = () => {
        
       />      <div className="flex">
         <Sidebar/>
-        <div className="p-8 flex-col bg-[white]" style={{ height: "100vh", width: '90%' }}>
+        <div className="p-8 flex-col bg-[white]"  style={{width:"87%",height:"auto" ,marginLeft:"auto"}}>
+        
           <select
             className="p-3 mb-6 rounded-md border border-gray-300 shadow-md text-lg"
             value={selectedCollection}
