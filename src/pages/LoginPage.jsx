@@ -31,7 +31,7 @@ function LoginPage() {
       });
 
       const response = await fetch(
-        "https://zayy-backend.onrender.com/api/auth/sellerLogin",
+        "https://zayy-backend-iz7q.onrender.com/api/auth/sellerLogin",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

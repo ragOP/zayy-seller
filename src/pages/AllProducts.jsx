@@ -20,9 +20,9 @@ const AllProducts = () => {
 
     let apiUrl = '';
     if (selectedOption === 'approve') {
-      apiUrl = 'https://zayy-backend.onrender.com/api/seller/getAllProducts';
+      apiUrl = 'https://zayy-backend-iz7q.onrender.com/api/seller/getAllProducts';
     } else if (selectedOption === 'pending') {
-      apiUrl = 'https://zayy-backend.onrender.com/api/seller/getAllPendingProduct';
+      apiUrl = 'https://zayy-backend-iz7q.onrender.com/api/seller/getAllPendingProduct';
     }
 
     if (apiUrl) {
@@ -56,7 +56,7 @@ const AllProducts = () => {
     <Header/>
     <div className="flex">
       <Sidebar/>
-      <div className="p-8 flex-col bg-[white]"  style={{width:"87%",height:"auto" ,marginLeft:"auto"}}      >
+      <div className="p-8 flex-col bg-[white]"  style={{width:"87%",height:"auto" ,marginLeft:"250px"}}      >
     <div className="overflow-x-auto">
       {error && <p className="text-red-500">{error}</p>}
       <select id="approvalDropdown"

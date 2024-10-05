@@ -17,7 +17,7 @@ const MyOrders = () => {
       return;
     }
 
-    const apiUrl = 'https://zayy-backend.onrender.com/api/seller/approvedOrders';
+    const apiUrl = 'https://zayy-backend-iz7q.onrender.com/api/seller/approvedOrders';
 
     fetch(apiUrl, {
       headers: {
@@ -101,7 +101,7 @@ const MyOrders = () => {
       <Header />
       <div className="flex">
         <Sidebar />
-        <div className="p-8 flex-col bg-[white]"  style={{width:"87%",height:"auto" ,marginLeft:"auto"}}>
+        <div className="p-8 flex-col bg-[white]"  style={{width:"87%",height:"auto" ,marginLeft:"250px"}}>
 
           <div className="overflow-x-auto">
             {error && <p className="text-red-500">{error}</p>}

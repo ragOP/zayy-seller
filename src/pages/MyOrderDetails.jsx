@@ -20,7 +20,7 @@ const MyOrderDetails = () => {
 
   const handleReject = async () => {
     try {
-      const response = await fetch('https://zayy-backend.onrender.com/api/seller/cancelOrder', {
+      const response = await fetch('https://zayy-backend-iz7q.onrender.com/api/seller/cancelOrder', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

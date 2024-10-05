@@ -63,7 +63,7 @@ const RegisterPage = () => {
         theme: "light",
       });
       const response = await fetch(
-        "https://zayy-backend.onrender.com/api/auth/sellerRegister",  
+        "https://zayy-backend-iz7q.onrender.com/api/auth/sellerRegister",  
         {
           method: "POST",
           body: formDataForRequest,

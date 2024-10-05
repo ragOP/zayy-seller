@@ -141,7 +141,7 @@ console.log("FormData",formData)
         theme: "light",
       });
       const response = await fetch(
-        "https://zayy-backend.onrender.com/api/seller/addProduct",
+        "https://zayy-backend-iz7q.onrender.com/api/seller/addProduct",
         {
           method: "POST",
           headers: {
@@ -186,7 +186,7 @@ console.log("FormData",formData)
             <Header/>
       <div className="flex">
       <Sidebar/>
-      <div className="p-8 flex items-center justify-center flex-col bg-[white]" style={{width:"90%",height:"auto",marginLeft:'200px'}}>
+      <div className="p-8 flex items-center justify-center flex-col bg-[white]" style={{width:"90%",height:"auto",marginLeft:'250px'}}>
         <h2 className="text-4xl font-bold mb-4 text-gray-900">Add Product</h2>
         <form
           onSubmit={handleSubmit}

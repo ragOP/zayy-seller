@@ -65,7 +65,7 @@ const AddCollection = () => {
       });
 
       const response = await fetch(
-        "https://zayy-backend.onrender.com/api/seller/collection",
+        "https://zayy-backend-iz7q.onrender.com/api/seller/collection",
         {
           method: "POST",
           headers: {
@@ -107,7 +107,7 @@ const AddCollection = () => {
         <Sidebar />
         <div
           className="p-8 flex items-center  flex-col bg-[white]"
-          style={{ height: "100vh", width: "90%" }}
+          style={{ height: "100vh", width: "80%" }}
         >
           <h2 className="text-4xl font-bold mb-4 text-gray-900">
             Add Collection
