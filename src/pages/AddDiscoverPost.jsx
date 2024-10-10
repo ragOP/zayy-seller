@@ -10,23 +10,30 @@ const AddDiscoverPost = () => {
   const fileInputRef = useRef(null);
   const [formData, setFormData] = useState({
     image: null,
-    question: '',
-    options: ['', ''], // Two empty options
+    content: '',
+    poolQuestion: '',
+    poolAnswerFirst: '',
+    poolAnswerSecond: '',
+    isPool: false,
   });
 
   const handleChange = (e) => {
     const { name, type, files, value } = e.target;
     if (type === "file") {
-      setFormData((prevState) => ({ ...prevState, [name]: files[0] }));
+      const file = files[0];
+   
+      if (file && (file.type === "image/png" || file.type === "image/jpeg")) {
+        setFormData((prevState) => ({ ...prevState, [name]: file }));
+      } else {
+        toast.error("Please upload a valid image (PNG or JPG)");
+      }
     } else {
       setFormData((prevState) => ({ ...prevState, [name]: value }));
     }
   };
 
-  const handleOptionChange = (index, value) => {
-    const updatedOptions = [...formData.options];
-    updatedOptions[index] = value;
-    setFormData((prevState) => ({ ...prevState, options: updatedOptions }));
+  const handleCheckboxChange = () => {
+    setFormData((prevState) => ({ ...prevState, isPool: !prevState.isPool }));
   };
 
   const handleAddImage = () => {
@@ -39,14 +46,11 @@ const AddDiscoverPost = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const formDataForRequest = new FormData();
+    const dataToSend = new FormData();
+    
     for (const key in formData) {
-      if (formData[key]) {
-        if (Array.isArray(formData[key])) {
-          formData[key].forEach(option => formDataForRequest.append(`${key}[]`, option));
-        } else {
-          formDataForRequest.append(key, formData[key]);
-        }
+      if (formData[key] || formData[key] === false) { 
+        dataToSend.append(key, formData[key]);
       }
     }
 
@@ -62,8 +66,11 @@ const AddDiscoverPost = () => {
       const response = await fetch("https://zayy-backend-iz7q.onrender.com/api/seller/addPost", {
         method: "POST",
         headers: { Authorization: `Bearer ${token}` },
-        body: formDataForRequest,
+        body: dataToSend,
       });
+      console.log("Response Status:", response.status);
+      const responseData = await response.json();
+      console.log("Response Data:", responseData);
 
       if (response.ok) {
         toast.update(loadingToastId, {
@@ -73,11 +80,11 @@ const AddDiscoverPost = () => {
         });
         setTimeout(() => navigate("/dashboard"), 2000);
       } else {
-        const errorMessage = await response.json();
-        throw new Error(JSON.stringify(errorMessage));
+        throw new Error(JSON.stringify(responseData));
       }
     } catch (error) {
       const parsedError = JSON.parse(error.message);
+      console.error("Error:", parsedError); 
       toast.update(loadingToastId, {
         render: parsedError.message,
         type: "error",
@@ -92,7 +99,7 @@ const AddDiscoverPost = () => {
       <Header />
       <div className="flex">
         <Sidebar />
-        <div className="p-8 flex flex-col items-center bg-gray-50" style={{ height: "100vh", width: "90%" }}>
+        <div className="p-8 flex flex-col items-center bg-gray-50" style={{ height: "100vh", width: "90%",marginLeft:'250px' }}>
           <h2 className="text-3xl font-bold mb-6 text-gray-800">Add Discover Post</h2>
           <form onSubmit={handleSubmit} className="w-full max-w-lg bg-white shadow-lg rounded-lg p-6">
             <div className="mb-4">
@@ -115,6 +122,7 @@ const AddDiscoverPost = () => {
                   className="hidden"
                 />
               </div>
+
               {formData.image && (
                 <div className="relative">
                   <img
@@ -132,33 +140,66 @@ const AddDiscoverPost = () => {
                 </div>
               )}
             </div>
-
-       
             <div className="mb-4">
-              <label htmlFor="question" className="block text-sm font-medium text-gray-700 mb-2">Question:</label>
+              <label htmlFor="content" className="block text-sm font-medium text-gray-700 mb-2">Caption:</label>
               <input
-                type="text"
-                id="question"
-                name="question"
-                value={formData.question}
+                id="content"
+                name="content"
+                value={formData.content}
                 onChange={handleChange}
                 className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring focus:ring-indigo-500"
+                rows="4"
+                placeholder="Enter your post caption here..."
               />
             </div>
 
-            <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700 mb-2">Options:</label>
-              {formData.options.map((option, index) => (
-                <input
-                  key={index}
-                  type="text"
-                  value={option}
-                  onChange={(e) => handleOptionChange(index, e.target.value)}
-                  className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring focus:ring-indigo-500 mb-2"
-                  placeholder={`Option ${index + 1}`}
-                />
-              ))}
+            <div className="mb-4 flex items-center">
+              <input
+                type="checkbox"
+                checked={formData.isPool}
+                onChange={handleCheckboxChange}
+                className="mr-2"
+              />
+              <label className="block text-sm font-medium text-gray-700">
+                Is this a poll?
+              </label>
             </div>
+
+            {formData.isPool && (
+              <>
+                <div className="mb-4">
+                  <label htmlFor="poolQuestion" className="block text-sm font-medium text-gray-700 mb-2">Poll Question:</label>
+                  <input
+                    type="text"
+                    id="poolQuestion"
+                    name="poolQuestion"
+                    value={formData.poolQuestion}
+                    onChange={handleChange}
+                    className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring focus:ring-indigo-500"
+                  />
+                </div>
+
+                <div className="mb-4">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Poll Answers:</label>
+                  <input
+                    type="text"
+                    name="poolAnswerFirst"
+                    value={formData.poolAnswerFirst}
+                    onChange={handleChange}
+                    className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring focus:ring-indigo-500 mb-2"
+                    placeholder="First Answer"
+                  />
+                  <input
+                    type="text"
+                    name="poolAnswerSecond"
+                    value={formData.poolAnswerSecond}
+                    onChange={handleChange}
+                    className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring focus:ring-indigo-500"
+                    placeholder="Second Answer"
+                  />
+                </div>
+              </>
+            )}
 
             <button
               type="submit"

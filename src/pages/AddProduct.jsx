@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Sidebar from "../components/Sidebar";
-import Header from "../components/Header";
+import Header from "../components/Header"
 
 
 const categoriesData = [
@@ -51,12 +51,20 @@ const AddProduct = () => {
 
   const handleChange = (e) => {
     const { name, value, type, checked, files } = e.target;
-
+  
     if (type === "file") {
       const imagesArray = Array.from(files);
+      const validImages = imagesArray.filter((file) =>
+        /\.(jpg|jpeg|png)$/i.test(file.name)
+      );
+  
+      if (validImages.length !== imagesArray.length) {
+        toast.error("Only JPG and PNG images are allowed.");
+      }
+  
       setFormData((prevState) => ({
         ...prevState,
-        [name]: imagesArray,
+        [name]: validImages,
       }));
     } else if (type === "checkbox") {
       if (name === "color" || name === "size") {
@@ -78,7 +86,8 @@ const AddProduct = () => {
         [name]: value,
       }));
     }
-};
+  };
+  
   
 
   const handleAddImages = () => {

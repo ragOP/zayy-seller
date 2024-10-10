@@ -14,14 +14,23 @@ const AddCollection = () => {
     image: null,
   });
 
+ 
   const handleChange = (e) => {
     const { name, value, type, files } = e.target;
 
     if (type === "file") {
-      setFormData((prevState) => ({
-        ...prevState,
-        [name]: files[0],
-      }));
+      const file = files[0];
+      const fileType = file?.type;
+
+      // Check if the file type is JPG or PNG
+      if (file && (fileType === "image/jpeg" || fileType === "image/png")) {
+        setFormData((prevState) => ({
+          ...prevState,
+          [name]: file,
+        }));
+      } else {
+        toast.error("Please upload a valid JPG or PNG image.");
+      }
     } else {
       setFormData((prevState) => ({
         ...prevState,
@@ -29,6 +38,7 @@ const AddCollection = () => {
       }));
     }
   };
+
 
   const handleAddImage = () => {
     fileInputRef.current.click();

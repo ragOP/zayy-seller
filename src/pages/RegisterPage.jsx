@@ -36,13 +36,20 @@ const RegisterPage = () => {
   };
   const handleChange = (e) => {
     const { name, value, files } = e.target;
+    
     if (name === "logo" && files[0]) {
       const logoFile = files[0];
-      setFormData({ ...formData, logo: logoFile });
+      const fileExtension = logoFile.name.split('.').pop().toLowerCase();
+      if (fileExtension === "jpg" || fileExtension === "jpeg" || fileExtension === "png") {
+        setFormData({ ...formData, logo: logoFile });
+      } else {
+        toast.error("Please upload a valid image file (JPG or PNG).");
+      }
     } else {
       setFormData({ ...formData, [name]: value });
     }
   };
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
