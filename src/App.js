@@ -13,6 +13,7 @@ import MyOrderDetail from "./pages/MyOrderDetails";
 import ProtectedRoute from "./Routes/ProtectedRoute";
 import DashboardPage from "./pages/Dashboard/DashboardPage";
 import AddDiscoverPost from "./pages/AddDiscoverPost";
+import AllDiscoverPost from "./pages/AllDiscoverPost";
 
 function App() {
   return (
@@ -31,6 +32,8 @@ function App() {
           <Route path="/dashboard/myorders" element={<ProtectedRoute element={<MyOrders />} />} />
           <Route path="/myorders/order-detail" element={<ProtectedRoute element={<MyOrderDetail />} />} />
           <Route path="/dashboard/discover" element={<ProtectedRoute element={<AddDiscoverPost />} />} />
+          <Route path="/dashboard/alldiscoverpost" element={<ProtectedRoute element={<AllDiscoverPost />} />} />
+
         </Routes>
       </Router>
   );

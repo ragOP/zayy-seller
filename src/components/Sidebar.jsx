@@ -25,6 +25,9 @@ function Sidebar() {
       <Link to="/dashboard/discover" className="text-white no-underline mb-4 flex items-center hover:bg-[#6a4edb] p-2 rounded">
       <DocumentPlusIcon className="h-6 w-6 mr-2" />Add Discover Section
       </Link>
+      <Link to="/dashboard/alldiscoverpost" className="text-white no-underline mb-4 flex items-center hover:bg-[#6a4edb] p-2 rounded">
+      <DocumentPlusIcon className="h-6 w-6 mr-2" />My Discover Post
+      </Link>
     </div>
   );
 }
