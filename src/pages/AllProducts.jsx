@@ -20,9 +20,9 @@ const AllProducts = () => {
 
     let apiUrl = '';
     if (selectedOption === 'approve') {
-      apiUrl = 'https://zayy-backend-iz7q.onrender.com/api/seller/getAllProducts';
+      apiUrl = 'https://zayy-backend-1nsc.onrender.com/api/seller/getAllProducts';
     } else if (selectedOption === 'pending') {
-      apiUrl = 'https://zayy-backend-iz7q.onrender.com/api/seller/getAllPendingProduct';
+      apiUrl = 'https://zayy-backend-1nsc.onrender.com/api/seller/getAllPendingProduct';
     }
 
     if (apiUrl) {

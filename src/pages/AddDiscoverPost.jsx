@@ -63,7 +63,7 @@ const AddDiscoverPost = () => {
         hideProgressBar: false,
       });
 
-      const response = await fetch("https://zayy-backend-iz7q.onrender.com/api/seller/addPost", {
+      const response = await fetch("https://zayy-backend-1nsc.onrender.com/api/seller/addPost", {
         method: "POST",
         headers: { Authorization: `Bearer ${token}` },
         body: dataToSend,

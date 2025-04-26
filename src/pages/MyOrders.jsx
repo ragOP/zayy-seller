@@ -17,7 +17,7 @@ const MyOrders = () => {
       return;
     }
 
-    const apiUrl = 'https://zayy-backend-iz7q.onrender.com/api/seller/approvedOrders';
+    const apiUrl = 'https://zayy-backend-1nsc.onrender.com/api/seller/approvedOrders';
 
     fetch(apiUrl, {
       headers: {

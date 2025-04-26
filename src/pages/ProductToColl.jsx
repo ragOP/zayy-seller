@@ -19,7 +19,7 @@ const ProductToColl = () => {
       return;
     }
 
-    fetch('https://zayy-backend-iz7q.onrender.com/api/seller/collection', {
+    fetch('https://zayy-backend-1nsc.onrender.com/api/seller/collection', {
       headers: {
         'Authorization': `Bearer ${token}`,
       },
@@ -47,7 +47,7 @@ const ProductToColl = () => {
       return;
     }
 
-    fetch('https://zayy-backend-iz7q.onrender.com/api/seller/getAllProducts', {
+    fetch('https://zayy-backend-1nsc.onrender.com/api/seller/getAllProducts', {
       headers: {
         'Authorization': `Bearer ${token}`,
       },
@@ -106,7 +106,7 @@ const ProductToColl = () => {
       theme: "light",
     });
   
-    fetch('https://zayy-backend-iz7q.onrender.com/api/seller/addToColllection', {
+    fetch('https://zayy-backend-1nsc.onrender.com/api/seller/addToColllection', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

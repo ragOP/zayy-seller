@@ -75,7 +75,7 @@ const AddCollection = () => {
       });
 
       const response = await fetch(
-        "https://zayy-backend-iz7q.onrender.com/api/seller/collection",
+        "https://zayy-backend-1nsc.onrender.com/api/seller/collection",
         {
           method: "POST",
           headers: {

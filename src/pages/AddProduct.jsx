@@ -150,7 +150,7 @@ console.log("FormData",formData)
         theme: "light",
       });
       const response = await fetch(
-        "https://zayy-backend-iz7q.onrender.com/api/seller/addProduct",
+        "https://zayy-backend-1nsc.onrender.com/api/seller/addProduct",
         {
           method: "POST",
           headers: {

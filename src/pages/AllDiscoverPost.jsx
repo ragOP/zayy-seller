@@ -16,7 +16,7 @@ const AllDiscoverPost = () => {
 
       try {
         const response = await fetch(
-          "https://zayy-backend-iz7q.onrender.com/api/seller/getAllPosts",
+          "https://zayy-backend-1nsc.onrender.com/api/seller/getAllPosts",
           {
             headers: {
               Authorization: `Bearer ${token}`,
